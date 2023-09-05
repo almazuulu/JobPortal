@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="author" content="DexignZone">
+    <meta name="robots" content="">
+    <meta name="keywords"
+        content="applicant, candidate, career, companies, employment, freelancer, job board, job directory, Job guru, job listing, job posting, job seeker, recruiting, resume, resume listing">
+    <meta name="description"
+        content="JobBoard: is a flexible and smooth theme to make it simple as possible to create a professional job portal website. It covers all the features that are necessary for job board like searching option, login and register.">
+    <meta property="og:title" content="Job Board - Job Portal HTML Template + RTL and Dark layout">
+    <meta property="og:description"
+        content="JobBoard: is a flexible and smooth theme to make it simple as possible to create a professional job portal website. It covers all the features that are necessary for job board like searching option, login and register.">
+    <meta property="og:image" content="https://job-board.dexignzone.com/xhtml/social-image.png">
+    <meta name="format-detection" content="telephone=no">
+
+    <!-- MOBILE SPECIFIC -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- FAVICONS ICON -->
+    <link rel="icon" href="{% static 'images/favicon.ico'%}" type="image/x-icon">
+
+    <!-- PAGE TITLE HERE -->
+    <title>{% block title %} PAGE TITLE {% endblock %}</title>
+    {% include 'includes/stylesheets.html' %}
+</head>
+
+<body id="bg">
+    <div id="loading-area"></div>
+    <div class="page-wraper">
+        <!-- header -->
+        {% include 'includes/header.html' %}
+        <!-- header END -->
+        <!-- Content -->
+        <div class="page-content">
+            {% block content %} Основной контент {% endblock %}
+        </div>
+
+        <!-- Modal Box -->
+        {% include 'includes/modalbox.html' %}
+        <!-- Modal Box End -->
+        <!-- Footer -->
+        {% include 'includes/footer.html' %}
+        <!-- Footer END -->
+        <!-- scroll top button -->
+        <button class="scroltop fa fa-arrow-up"></button>
+    </div>
+    <!-- JAVASCRIPT FILES ========================================= -->
+    {% include 'includes/jsfiles.html' %}
+</body>
+
+</html>
