@@ -14,8 +14,8 @@
 
                 <!-- Nav Toggle Button -->
                 <button class="navbar-toggler collapsed navicon justify-content-end" type="button"
-                    data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown"
-                    aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+                    data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown"
+                    aria-expanded="false" aria-label="Toggle navigation">
                     <span></span>
                     <span></span>
                     <span></span>
@@ -28,9 +28,8 @@
                             <span class="mode-label"></span>
                         </a>
                         <a href="register-2.html" class="site-button"><i class="fa fa-user"></i> Sign Up</a>
-                        <!-- <a href="javascript:void(0);" title="READ MORE" rel="bookmark" data-bs-toggle="modal"
-                            data-bs-target="#car-details" class="site-button"><i class="fa fa-lock"></i> login
-                        </a> -->
+                        <a href="{% url 'login' %}" title="READ MORE" rel="bookmark" 
+                             class="site-button"><i class="fa fa-lock"></i> Login </a>
                     </div>
                 </div>
                 <!-- Main Nav -->
@@ -47,7 +46,7 @@
                         <li><a href="{% url 'blogs' %}" class="dez-page">Blogs</a></li>
                         <li><a href="{% url 'contact' %}" class="dez-page">Contact Us</a></li>
                         <li><a href="{% url 'about' %}" class="dez-page">About Us</a></li>
-                        <li><a href="{% url 'login' %}" class="dez-page">login</a>
+                        <!-- <li><a href="{% url 'login' %}" class="dez-page">login</a> -->
                         </li>
                     </ul>
                 </div>
