@@ -12977,14 +12977,7 @@ ol.commentlist li .star-rating {
 	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#1ebbf0', endColorstr='#39dfaa',GradientType=1 ); /* IE6-9 fallback on horizontal gradient */
 	bottom: 70px;
 }
-.theme-btn.bt-buy-now{
-	/* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#1fdf61+0,88BA46+100 */
-	background: #1fdf61; /* Old browsers */
-	background: -moz-linear-gradient(top,  #A3D179 0%, #88BA46 100%); /* FF3.6-15 */
-	background: -webkit-linear-gradient(top,  #A3D179 0%,#88BA46 100%); /* Chrome10-25,Safari5.1-6 */
-	background: linear-gradient(to bottom,  #A3D179 0%,#88BA46 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
-	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#1fdf61', endColorstr='#88BA46',GradientType=0 ); /* IE6-9 */
-}
+
 .theme-btn:hover{
 	color:#fff;
 	padding: 0 20px;
