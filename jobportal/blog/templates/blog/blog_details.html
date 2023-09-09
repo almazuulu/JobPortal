@@ -1,17 +1,23 @@
 {% extends 'base.html' %}
 {% load static %}
-{% block title %} Detail of the news {% endblock %}
+{% block title %} {{ blog.title }} {% endblock %}
 {% block content %}
 <!-- inner page banner -->
 <div class="dez-bnr-inr overlay-black-middle" style="background-image:url({% static 'images/banner/bnr1.jpg' %});">
     <div class="container">
         <div class="dez-bnr-inr-entry">
-            <h1 class="text-white">Blog Details</h1>
+            <h1 class="text-white">
+                {% if blog.categories %}
+                    {% for category in blog.categories.all %}
+                        {{ category }} {% if not forloop.last %}, {% endif %}
+                    {% endfor %}
+                {% endif %}
+            </h1>
             <!-- Breadcrumb row -->
             <div class="breadcrumb-row">
                 <ul class="list-inline">
                     <li><a href="{% url 'home' %}">Home</a></li>
-                    <li>Blog Details</li>
+                    <li>{{ blog.title }}</li>
                 </ul>
             </div>
             <!-- Breadcrumb row END -->
@@ -28,90 +34,33 @@
                 <div class="blog-post blog-single blog-style-1">
                     <div class="dez-post-meta">
                         <ul class="d-flex align-items-center">
-                            <li class="post-date"><i class="fa fa-calendar"></i>September 18, 2021</li>
-                            <li class="post-author"><i class="fa fa-user"></i>By <a
-                                    href="blog-details.html#">demongo</a> </li>
-                            <li class="post-comment"><i class="far fa-comments"></i><a href="blog-details.html#">5k</a>
+                            <li class="post-date"><i class="fa fa-calendar"></i>{{ blog.created_at }}</li>
+                            <li class="post-author"><i class="fa fa-user"></i>By <a href="blog-details.html#">
+                                {{ blog.author }}</a> </li>
+                            <li class="post-comment"><i class="far fa-comments"></i><a
+                                    href="{% url 'blog_details' blog.id %}">5k</a>
                             </li>
                         </ul>
                     </div>
                     <div class="dez-post-title">
-                        <h4 class="post-title m-t0">Do you have a job that the average person doesnӴ even know exists?
+                        <h4 class="post-title m-t0">{{ blog.title }}
                         </h4>
                     </div>
-                    <div class="dez-post-media dez-img-effect zoom-slow m-t20"><img
-                            src="{ % static 'images/blog/default/thum1.jpg' % }" alt=""></div>
+                    <div class="dez-post-media dez-img-effect zoom-slow m-t20"><img src="{{ blog.image.url }}" alt=""
+                            style="width: 50%;"></div>
                     <div class="dez-post-text">
-                        <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has
-                            been the industry standard dummy
-                            text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to
-                            make a type specimen book.Lorem Ipsum
-                            is simply dummy text of the printing and typesetting printer a galley Lorem Ipsum is simply
-                            dummy text of the printing and typesetting industry.
-                            Lorem Ipsum has been the industry's standard text ever since the 1500s, when an unknown
-                            printer took a galley of type and scrambled it to
-                            make a type specimen It has urvived not only five centuries, but also the leap into
-                            electronic typesetting, remaining essentially unchanged.
-                            It was popularised in 1960s with the release of Letraset sheets containing Lorem Ipsum
-                            passages, and more recently with desktop
-                            publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>
-                        <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has
-                            been the industry's standard text
-                            ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make
-                            a type specimen
-                            It has urvived not only five centuries, but also the leap into electronic typesetting.</p>
-                        <blockquote>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Has been
-                            the industry's standard text ever since
-                            the 1500s, when an unknown printer took a galley of type and scrambled it to make a type
-                            specimencenturies.</blockquote>
-                        <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has
-                            been the industry's standard text
-                            ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make
-                            a type specimen
-                            It has urvived not only five centuries, but also the leap into electronic typesetting.</p>
-                        <h5>Completely Responsive</h5>
-                        <img class="alignleft blog-side-img" src="images/blog/grid/pic4.jpg" alt="">
-                        <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has
-                            been the industry's standard dummy text
-                            ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make
-                            a type specimen book. It has survived not only
-                            five centuries, but also the leap into electronic typesetting, remaining essentially
-                            unchanged. It was popularised in the 1960s with the release
-                            of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop
-                            publishing software like
-                            Aldus PageMaker including versions of Lorem Ipsum.Lorem Ipsum is simply dummy text of the
-                            printing and typesetting industry. Lorem Ipsum
-                            has been the industry's standard dummy text ever since the 1500s, when an unknown printer
-                            took a galley of type and scrambled it to make a
-                            type specimen book. It has survived not only five centuries, but also the leap into
-                            electronic typesetting, remaining essentially unchanged.
-                            It was popularised in the 1960s with the releasefive centuries, but also the leap into
-                            electronic typesetting, remaining essentially unchanged.
-                            It was popularised in the 1960s with the release</p>
-                        <div class="dez-divider bg-gray-dark"></div>
-                        <img class="alignright blog-side-img" src="images/blog/grid/pic1.jpg" alt="">
-                        <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has
-                            been the industry's standard dummy text
-                            ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make
-                            a type specimen book. It has survived not only
-                            five centuries, but also the leap into electronic typesetting, remaining essentially
-                            unchanged. It was popularised in the 1960s with the release
-                            of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop
-                            publishing software like
-                            Aldus PageMaker including versions of Lorem Ipsum.Lorem Ipsum is simply dummy text of the
-                            printing and typesetting industry. Lorem Ipsum
-                            has been the industry's standard dummy text ever since the 1500s, when an unknown printer
-                            took a galley of type and scrambled it to make a
-                            type specimen book. It has survived not only five centuries, but also the leap into
-                            electronic typesetting, remaining essentially unchanged.
-                            It was popularised in the 1960s with the release</p>
+
+                        {% autoescape off %}
+                        {{ blog.content|linebreaks }}
+                        {% endautoescape %}
+
+
                     </div>
                     <div class="dez-post-tags clear">
                         <div class="post-tags">
-                            <a href="javascript:void(0);">Child </a>
-                            <a href="javascript:void(0);">Eduction </a>
-                            <a href="javascript:void(0);">Money </a>
-                            <a href="javascript:void(0);">Resturent </a>
+                            {% for category in blog.categories.all %}
+                            <a href="javascript:void(0);"> {{ category }} </a>
+                            {% endfor %}
                         </div>
                     </div>
                     <div class="dez-divider bg-gray-dark op4"><i class="icon-dot c-square"></i></div>
@@ -137,112 +86,25 @@
                 </div>
                 <div class="clear" id="comment-list">
                     <div class="comments-area" id="comments">
-                        <h2 class="comments-title">8 Comments</h2>
+                        <h2 class="comments-title">{{ blog.comments.count }} Comments</h2>
                         <div class="clearfix m-b20">
                             <!-- comment list END -->
                             <ol class="comment-list">
+                                {% for comment in comments %}
                                 <li class="comment">
                                     <div class="comment-body">
                                         <div class="comment-author vcard"> <img class="avatar photo"
-                                                src="{% static 'images/testimonials/pic1.jpg' %}" alt=""> <cite class="fn">Stacy
-                                                poe</cite> <span class="says">says:</span> </div>
-                                        <div class="comment-meta"> <a href="javascript:void(0);">October 6, 2021 at 7:15
-                                                am</a> </div>
-                                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam vitae
-                                            neqnsectetur adipiscing elit. Nam viae neqnsectetur adipiscing elit.
-                                            Nam vitae neque vitae sapien malesuada aliquet. </p>
+                                                src="{{ comment.user_image.url }}" alt=""> <cite
+                                                class="fn">{{ comment.user.firstname }} {{ comment.user.lastname }} </cite> <span class="says">says:</span> </div>
+                                        <div class="comment-meta"> <a href="javascript:void(0);">{{ comment.created_at }}</a> </div>
+                                        <p> {{ comment.text  }}</p>
                                         <div class="reply"> <a href="javascript:void(0);"
                                                 class="comment-reply-link">Reply</a> </div>
                                     </div>
-                                    <ol class="children">
-                                        <li class="comment odd parent">
-                                            <div class="comment-body">
-                                                <div class="comment-author vcard"> <img class="avatar photo"
-                                                        src="{% static 'images/testimonials/pic2.jpg' %}" alt=""> <cite
-                                                        class="fn">Stacy poe</cite> <span class="says">says:</span>
-                                                </div>
-                                                <div class="comment-meta"> <a href="javascript:void(0);">October 6, 2021
-                                                        at 7:15 am</a> </div>
-                                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam vitae
-                                                    neque vitae sapien malesuada aliquet.
-                                                    In viverra dictum justo in vehicula. Fusce et massa eu ante ornare
-                                                    molestie. Sed vestibulum sem felis,
-                                                    ac elementum ligula blandit ac.</p>
-                                                <div class="reply"> <a href="javascript:void(0);"
-                                                        class="comment-reply-link">Reply</a> </div>
-                                            </div>
-                                            <ol class="children">
-                                                <li class="comment odd parent">
-                                                    <div class="comment-body">
-                                                        <div class="comment-author vcard"> <img class="avatar photo"
-                                                                src="images/testimonials/pic3.jpg" alt=""> <cite
-                                                                class="fn">Stacy poe</cite> <span
-                                                                class="says">says:</span> </div>
-                                                        <div class="comment-meta"> <a href="javascript:void(0);">October
-                                                                6, 2021 at 7:15 am</a> </div>
-                                                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam
-                                                            vitae neque vitae sapien malesuada aliquet.
-                                                            In viverra dictum justo in vehicula. Fusce et massa eu ante
-                                                            ornare molestie. Sed vestibulum sem felis,
-                                                            ac elementum ligula blandit ac.</p>
-                                                        <div class="reply"> <a href="javascript:void(0);"
-                                                                class="comment-reply-link">Reply</a> </div>
-                                                    </div>
-                                                </li>
-                                            </ol>
-                                            <!-- list END -->
-                                        </li>
-                                    </ol>
+                                   
                                     <!-- list END -->
                                 </li>
-                                <li class="comment">
-                                    <div class="comment-body">
-                                        <div class="comment-author vcard"> <img class="avatar photo"
-                                                src="images/testimonials/pic1.jpg" alt=""> <cite class="fn">Stacy
-                                                poe</cite> <span class="says">says:</span> </div>
-                                        <div class="comment-meta"> <a href="javascript:void(0);">October 6, 2021 at 7:15
-                                                am</a> </div>
-                                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam vitae neque
-                                            vitae sapien malesuada aliquet.
-                                            In viverra dictum justo in vehicula. Fusce et massa eu ante ornare molestie.
-                                            Sed vestibulum sem felis,
-                                            ac elementum ligula blandit ac.</p>
-                                        <div class="reply"> <a href="javascript:void(0);"
-                                                class="comment-reply-link">Reply</a> </div>
-                                    </div>
-                                </li>
-                                <li class="comment">
-                                    <div class="comment-body">
-                                        <div class="comment-author vcard"> <img class="avatar photo"
-                                                src="images/testimonials/pic2.jpg" alt=""> <cite class="fn">Stacy
-                                                poe</cite> <span class="says">says:</span> </div>
-                                        <div class="comment-meta"> <a href="javascript:void(0);">October 6, 2021 at 7:15
-                                                am</a> </div>
-                                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam vitae neque
-                                            vitae sapien malesuada aliquet.
-                                            In viverra dictum justo in vehicula. Fusce et massa eu ante ornare molestie.
-                                            Sed vestibulum sem felis,
-                                            ac elementum ligula blandit ac.</p>
-                                        <div class="reply"> <a href="javascript:void(0);"
-                                                class="comment-reply-link">Reply</a> </div>
-                                    </div>
-                                </li>
-                                <li class="comment">
-                                    <div class="comment-body">
-                                        <div class="comment-author vcard"> <img class="avatar photo"
-                                                src="images/testimonials/pic3.jpg" alt=""> <cite class="fn">Stacy
-                                                poe</cite> <span class="says">says:</span> </div>
-                                        <div class="comment-meta"> <a href="javascript:void(0);">October 6, 2021 at 7:15
-                                                am</a> </div>
-                                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam vitae neque
-                                            vitae sapien malesuada aliquet.
-                                            In viverra dictum justo in vehicula. Fusce et massa eu ante ornare molestie.
-                                            Sed vestibulum sem felis,
-                                            ac elementum ligula blandit ac.</p>
-                                        <div class="reply"> <a href="javascript:void(0);"
-                                                class="comment-reply-link">Reply</a> </div>
-                                    </div>
-                                </li>
+                                {% endfor %}
                             </ol>
                             <!-- comment list END -->
                             <!-- Form -->
@@ -303,57 +165,25 @@
                     <div class="widget recent-posts-entry">
                         <h6 class="widget-title style-1">Recent Posts</h6>
                         <div class="widget-post-bx">
+                            {% for rpost in topRecentNews %}
                             <div class="widget-post clearfix">
-                                <div class="dez-post-media"> <img src="{% static 'images/blog/recent-blog/pic1.jpg' %}"
-                                        width="200" height="143" alt=""> </div>
+                                <div class="dez-post-media"> <img src="{{ rpost.image.url }}" width="200" height="143"
+                                        alt=""> </div>
                                 <div class="dez-post-info">
                                     <div class="dez-post-header">
-                                        <h6 class="post-title"><a href="blog-details.html">11 Tips to Help You Get New
-                                                Clients Through Cold Calling</a></h6>
+                                        <h6 class="post-title"><a href="blog-details.html">{{ rpost.title }}</a></h6>
                                     </div>
                                     <div class="dez-post-meta">
                                         <ul class="d-flex align-items-center">
-                                            <li class="post-date"><i class="fa fa-calendar"></i>Sep 18, 2021</li>
-                                            <li class="post-comment"><a href="blog-details.html#"><i
+                                            <li class="post-date"><i class="fa fa-calendar"></i>{{ r }}</li>
+                                            <li class="post-comment"><a href="blog-left-img.html#"><i
                                                         class="far fa-comments"></i>5k</a> </li>
                                         </ul>
                                     </div>
                                 </div>
                             </div>
-                            <div class="widget-post clearfix">
-                                <div class="dez-post-media"> <img src="images/blog/recent-blog/pic2.jpg" width="200"
-                                        height="160" alt=""> </div>
-                                <div class="dez-post-info">
-                                    <div class="dez-post-header">
-                                        <h6 class="post-title"><a href="blog-details.html">Do you have a job that the
-                                                average person doesn’t even know exists?</a></h6>
-                                    </div>
-                                    <div class="dez-post-meta">
-                                        <ul class="d-flex align-items-center">
-                                            <li class="post-date"><i class="fa fa-calendar"></i>Sep 18, 2021</li>
-                                            <li class="post-comment"><a href="blog-details.html#"><i
-                                                        class="far fa-comments"></i>5k</a> </li>
-                                        </ul>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="widget-post clearfix">
-                                <div class="dez-post-media"> <img src="images/blog/recent-blog/pic3.jpg" width="200"
-                                        height="160" alt=""> </div>
-                                <div class="dez-post-info">
-                                    <div class="dez-post-header">
-                                        <h6 class="post-title"><a href="blog-details.html">Using Banner Stands To
-                                                Increase Trade Show Traffic</a></h6>
-                                    </div>
-                                    <div class="dez-post-meta">
-                                        <ul class="d-flex align-items-center">
-                                            <li class="post-date"><i class="fa fa-calendar"></i>Sep 18, 2021</li>
-                                            <li class="post-comment"><a href="blog-details.html#"><i
-                                                        class="far fa-comments"></i>5k</a> </li>
-                                        </ul>
-                                    </div>
-                                </div>
-                            </div>
+                            {% endfor %}
+
                         </div>
                     </div>
 
@@ -361,60 +191,58 @@
                         <h6 class="widget-title style-1">Our services</h6>
                         <ul class="lightgallery">
                             <li>
-                                <span data-exthumbimage="images/gallery/small/pic1.jpg"
-                                    data-src="images/gallery/middle/pic1.jpg"
+                                <span data-exthumbimage="{% static 'images/gallery/small/pic1.jpg' %}"
+                                    data-src="{% static 'images/gallery/middle/pic1.jpg' %}"
                                     class="lightimg dez-img-overlay1 dez-img-effect zoom-slow" title="Maintenance">
-                                    <img src="images/gallery/small/pic1.jpg" alt="">
+                                    <img src="{% static 'images/gallery/small/pic1.jpg' %}" alt="">
                                 </span>
                             </li>
                             <li>
-                                <span data-exthumbimage="images/gallery/small/pic2.jpg"
-                                    data-src="images/gallery/middle/pic2.jpg"
+                                <span data-exthumbimage="{% static 'images/gallery/small/pic2.jpg' %}"
+                                    data-src="{% static 'images/gallery/middle/pic2.jpg' %}"
                                     class="lightimg dez-img-overlay1 dez-img-effect zoom-slow" title="Maintenance">
-                                    <img src="images/gallery/small/pic2.jpg" alt="">
+                                    <img src="{% static 'images/gallery/small/pic2.jpg' %}" alt="">
                                 </span>
                             </li>
                             <li>
-                                <span data-exthumbimage="images/gallery/small/pic3.jpg"
-                                    data-src="images/gallery/middle/pic3.jpg"
+                                <span data-exthumbimage="{% static 'images/gallery/small/pic3.jpg' %}"
+                                    data-src="{% static 'images/gallery/middle/pic3.jpg' %}"
                                     class="lightimg dez-img-overlay1 dez-img-effect zoom-slow" title="Maintenance">
-                                    <img src="images/gallery/small/pic3.jpg" alt="">
+                                    <img src="{% static 'images/gallery/small/pic3.jpg' %}" alt="">
                                 </span>
                             </li>
                             <li>
-                                <span data-exthumbimage="images/gallery/small/pic4.jpg"
-                                    data-src="images/gallery/middle/pic4.jpg"
+                                <span data-exthumbimage="{% static 'images/gallery/small/pic4.jpg' %}"
+                                    data-src="{% static 'images/gallery/middle/pic4.jpg' %}"
                                     class="lightimg dez-img-overlay1 dez-img-effect zoom-slow" title="Maintenance">
-                                    <img src="images/gallery/small/pic4.jpg" alt="">
+                                    <img src="{% static 'images/gallery/small/pic4.jpg' %}" alt="">
                                 </span>
                             </li>
                             <li>
-                                <span data-exthumbimage="images/gallery/small/pic5.jpg"
-                                    data-src="images/gallery/middle/pic5.jpg"
+                                <span data-exthumbimage="{% static 'images/gallery/small/pic5.jpg' %}"
+                                    data-src="{% static 'images/gallery/middle/pic5.jpg' %}"
                                     class="lightimg dez-img-overlay1 dez-img-effect zoom-slow" title="Maintenance">
-                                    <img src="images/gallery/small/pic5.jpg" alt="">
+                                    <img src="{% static 'images/gallery/small/pic5.jpg' %}" alt="">
                                 </span>
                             </li>
                             <li>
-                                <span data-exthumbimage="images/gallery/small/pic6.jpg"
-                                    data-src="images/gallery/middle/pic6.jpg"
+                                <span data-exthumbimage="{% static 'images/gallery/small/pic6.jpg' %}"
+                                    data-src="{% static 'images/gallery/middle/pic6.jpg' %}"
                                     class="lightimg dez-img-overlay1 dez-img-effect zoom-slow" title="Maintenance">
-                                    <img src="images/gallery/small/pic6.jpg" alt="">
+                                    <img src="{% static 'images/gallery/small/pic6.jpg' %}" alt="">
                                 </span>
                             </li>
                         </ul>
                     </div>
 
                     <div class="widget widget_archive">
-                        <h6 class="widget-title style-1">Categories List</h6>
-                        <ul>
-                            <li><a href="javascript:void(0);">aciform</a></li>
-                            <li><a href="javascript:void(0);">championship</a></li>
-                            <li><a href="javascript:void(0);">chastening</a></li>
-                            <li><a href="javascript:void(0);">clerkship</a></li>
-                            <li><a href="javascript:void(0);">disinclination</a></li>
-                        </ul>
-                    </div>
+						<h6 class="widget-title style-1">Categories List</h6>
+						<ul>
+							{% for category in categories %}
+							<li><a href="javascript:void(0);">{{ category }}</a></li>
+							{% endfor %}
+						</ul>
+					</div>
 
                     <div class="widget widget-newslatter">
                         <h6 class="widget-title style-1">Newsletter</h6>

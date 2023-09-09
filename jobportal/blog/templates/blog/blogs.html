@@ -27,32 +27,33 @@
 			<div class="col-xl-9 col-lg-8 col-md-7 m-b10">
 				{% for news in allNews %}
 				<div class="blog-post blog-md clearfix">
-					<div class="dez-post-media dez-img-effect zoom-slow radius-sm"> <a href="blog-details.html"><img
+					<div class="dez-post-media dez-img-effect zoom-slow radius-sm"> <a href="{% url 'blog_details' news.id %}"><img
 								src="{{  news.image.url }}" alt="news.title"></a> </div>
 					<div class="dez-post-info">
 						<div class="dez-post-meta">
 							<ul class="d-flex align-items-center">
 								<li class="post-date"><i class="fa fa-calendar"></i>{{ news.created_at }}</li>
-								<li class="post-author"><i class="fa fa-user"></i>By <a
-										href="blog-left-img.html#">{{ news.author }}</a> </li>
-								<li class="post-comment"><i class="far fa-comments"></i><a
-										href="blog-left-img.html#">5k</a> </li>
+								<li class="post-author"><i class="fa fa-user"></i>By <a href="blog-left-img.html#">{{ news.author }}</a> </li>
+								<li><i class="fa fa-calendar"></i>{{ news.category }}</li>
+								<li class="post-comment"><i class="far fa-comments"></i>{{ news.comments.count }}</li>
 							</ul>
 						</div>
 						<div class="dez-post-title ">
-							<h4 class="post-title font-24"><a href="blog-details.html">{{ news.title }}</a></h4>
+							<h4 class="post-title font-24"><a href="{% url 'blog_details' news.id %}">{{ news.title }}</a></h4>
 						</div>
 						<div class="dez-post-text">
+							{% autoescape off %}
 							<p>{{ news.content|truncatewords:20 }}</p>
+							{% endautoescape %}
 						</div>
 						<div class="dez-post-readmore blog-share">
-							<a href="blog-details.html" title="READ MORE" rel="bookmark" class="site-button-link"><span
-									class="fw6">READ MORE</span></a>
+							<a href="{% url 'blog_details' news.id %}" title="READ MORE" rel="bookmark"
+								class="site-button-link"><span class="fw6">READ MORE</span></a>
 						</div>
 					</div>
 				</div>
 				{% endfor %}
-				
+
 				<!-- Pagination start -->
 				<div class="pagination-bx clearfix text-center">
 					<ul class="pagination">
@@ -86,57 +87,25 @@
 					<div class="widget recent-posts-entry">
 						<h6 class="widget-title style-1">Recent Posts</h6>
 						<div class="widget-post-bx">
+							{% for rpost in topRecentNews %}
 							<div class="widget-post clearfix">
-								<div class="dez-post-media"> <img src="{% static 'images/blog/recent-blog/pic1.jpg' %} "
-										width="200" height="143" alt=""> </div>
+								<div class="dez-post-media"> <img src="{{ rpost.image.url }}" width="200" height="143"
+										alt=""> </div>
 								<div class="dez-post-info">
 									<div class="dez-post-header">
-										<h6 class="post-title"><a href="blog-details.html">11 Tips to Help You Get New
-												Clients Through Cold Calling</a></h6>
+										<h6 class="post-title"><a href="blog-details.html">{{ rpost.title }}</a></h6>
 									</div>
 									<div class="dez-post-meta">
 										<ul class="d-flex align-items-center">
-											<li class="post-date"><i class="fa fa-calendar"></i>Sep 18, 2021</li>
+											<li class="post-date"><i class="fa fa-calendar"></i>{{ r }}</li>
 											<li class="post-comment"><a href="blog-left-img.html#"><i
 														class="far fa-comments"></i>5k</a> </li>
 										</ul>
 									</div>
 								</div>
 							</div>
-							<div class="widget-post clearfix">
-								<div class="dez-post-media"> <img src="images/blog/recent-blog/pic2.jpg" width="200"
-										height="160" alt=""> </div>
-								<div class="dez-post-info">
-									<div class="dez-post-header">
-										<h6 class="post-title"><a href="blog-details.html">Do you have a job that the
-												average person doesn’t even know exists?</a></h6>
-									</div>
-									<div class="dez-post-meta">
-										<ul class="d-flex align-items-center">
-											<li class="post-date"><i class="fa fa-calendar"></i>Sep 18, 2021</li>
-											<li class="post-comment"><a href="blog-left-img.html#"><i
-														class="far fa-comments"></i>5k</a> </li>
-										</ul>
-									</div>
-								</div>
-							</div>
-							<div class="widget-post clearfix">
-								<div class="dez-post-media"> <img src="images/blog/recent-blog/pic3.jpg" width="200"
-										height="160" alt=""> </div>
-								<div class="dez-post-info">
-									<div class="dez-post-header">
-										<h6 class="post-title"><a href="blog-details.html">Using Banner Stands To
-												Increase Trade Show Traffic</a></h6>
-									</div>
-									<div class="dez-post-meta">
-										<ul class="d-flex align-items-center">
-											<li class="post-date"><i class="fa fa-calendar"></i>Sep 18, 2021</li>
-											<li class="post-comment"><a href="blog-left-img.html#"><i
-														class="far fa-comments"></i>5k</a> </li>
-										</ul>
-									</div>
-								</div>
-							</div>
+							{% endfor %}
+
 						</div>
 					</div>
 
@@ -191,11 +160,9 @@
 					<div class="widget widget_archive">
 						<h6 class="widget-title style-1">Categories List</h6>
 						<ul>
-							<li><a href="javascript:void(0);">aciform</a></li>
-							<li><a href="javascript:void(0);">championship</a></li>
-							<li><a href="javascript:void(0);">chastening</a></li>
-							<li><a href="javascript:void(0);">clerkship</a></li>
-							<li><a href="javascript:void(0);">disinclination</a></li>
+							{% for category in categories %}
+							<li><a href="javascript:void(0);">{{ category }}</a></li>
+							{% endfor %}
 						</ul>
 					</div>
 
