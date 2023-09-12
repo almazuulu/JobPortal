@@ -38,7 +38,7 @@
                             <li class="post-author"><i class="fa fa-user"></i>By <a href="blog-details.html#">
                                 {{ blog.author }}</a> </li>
                             <li class="post-comment"><i class="far fa-comments"></i><a
-                                    href="{% url 'blog_details' blog.id %}">5k</a>
+                                    href="{% url 'blog_details' blog.id %}">{{ blog.comments.count }}</a>
                             </li>
                         </ul>
                     </div>
@@ -57,9 +57,9 @@
 
                     </div>
                     <div class="dez-post-tags clear">
-                        <div class="post-tags">
+                        <div class="post-tags category-link">
                             {% for category in blog.categories.all %}
-                            <a href="javascript:void(0);"> {{ category }} </a>
+                            <a href="{% url 'blogs_by_cat' category.id  %}" class="bg-primary text-white"> {{ category }} </a>
                             {% endfor %}
                         </div>
                     </div>
@@ -177,7 +177,7 @@
                                         <ul class="d-flex align-items-center">
                                             <li class="post-date"><i class="fa fa-calendar"></i>{{ r }}</li>
                                             <li class="post-comment"><a href="blog-left-img.html#"><i
-                                                        class="far fa-comments"></i>5k</a> </li>
+                                                        class="far fa-comments"></i>{{ rpost.comments.count }}</a> </li>
                                         </ul>
                                     </div>
                                 </div>
@@ -239,7 +239,7 @@
 						<h6 class="widget-title style-1">Categories List</h6>
 						<ul>
 							{% for category in categories %}
-							<li><a href="javascript:void(0);">{{ category }}</a></li>
+							<li><a href="{% url 'blogs_by_cat' category.id %}">{{ category }}</a></li>
 							{% endfor %}
 						</ul>
 					</div>

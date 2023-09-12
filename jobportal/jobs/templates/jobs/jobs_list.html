@@ -1,0 +1,217 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %} List jobs {% endblock %}
+{% block content %}
+<!-- inner page banner -->
+<div class="dez-bnr-inr overlay-black-middle" style="background-image:url({% static 'images/banner/bnr1.jpg' %});">
+	<div class="container">
+		<div class="dez-bnr-inr-entry">
+			<h1 class="text-white">Browse Jobs List</h1>
+			<!-- Breadcrumb row -->
+			<div class="breadcrumb-row">
+				<ul class="list-inline">
+					<li><a href="{% url 'home' %}">Home</a></li>
+					<li> List of jobs</li>
+				</ul>
+			</div>
+			<!-- Breadcrumb row END -->
+		</div>
+	</div>
+</div>
+<!-- inner page banner END -->
+<!-- Filters Search -->
+<div class="section-full browse-job-find">
+	<div class="container">
+		<div class="find-job-bx">
+			<form class="dezPlaceAni">
+				<div class="row">
+					<div class="col-lg-4 col-md-6">
+						<div class="form-group">
+							<label>Job Title, Keywords, or Phrase</label>
+							<div class="input-group">
+								<input type="text" class="form-control" placeholder="">
+								<div class="input-group-append">
+									<span class="input-group-text"><i class="fa fa-search"></i></span>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="col-lg-3 col-md-6">
+						<div class="form-group">
+							<label>City, State or ZIP</label>
+							<div class="input-group">
+								<input type="text" class="form-control" placeholder="">
+								<div class="input-group-append">
+									<span class="input-group-text"><i class="fas fa-map-marker-alt"></i></span>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="col-lg-3 col-md-6">
+						<div class="form-group">
+							<select>
+								<option>Select Sector</option>
+								<option>Construction</option>
+								<option>Corodinator</option>
+								<option>Employer</option>
+								<option>Financial Career</option>
+								<option>Information Technology</option>
+								<option>Marketing</option>
+								<option>Quality check</option>
+								<option>Real Estate</option>
+								<option>Sales</option>
+								<option>Supporting</option>
+								<option>Teaching</option>
+							</select>
+						</div>
+					</div>
+					<div class="col-lg-2 col-md-6">
+						<button type="submit" class="site-button btn-block">Find Job</button>
+					</div>
+				</div>
+			</form>
+		</div>
+	</div>
+</div>
+<!-- Filters Search END -->
+<!-- contact area -->
+<div class="content-block">
+	<!-- Browse Jobs -->
+	<div class="section-full browse-job p-b50">
+		<div class="container">
+			<div class="row">
+				<div class="col-xl-9 col-lg-8 col-md-7">
+					<div class="job-bx-title clearfix">
+						<h5 class="font-weight-700 float-start text-uppercase">{{ jobs.count }} Jobs Found</h5>
+						<div class="float-end">
+							<span class="select-title">Sort by freshness</span>
+							<select>
+								<option>Last 2 Months</option>
+								<option>Last Months</option>
+								<option>Last Weeks</option>
+								<option>Last 3 Days</option>
+							</select>
+						</div>
+					</div>
+					<ul class="post-job-bx">
+						{% for job in jobs %}
+						<li>
+							<div class="post-bx">
+								<div class="d-flex m-b30">
+									<div class="job-post-company">
+										<a href="javascript:void(0);"><span>
+												<img alt="" src="{{ job.company.company_logo.url }}" />
+											</span></a>
+									</div>
+									<div class="job-post-info">
+										<h4><a href="{% url 'job_details' job.id %}">{{ job.title }}</a></h4>
+										<ul>
+											<li><i class="fas fa-map-marker-alt"></i> {{ job.location }}, {{ job.country }}</li>
+											<li><i class="far fa-bookmark"></i> {{ job.job_type }}</li>
+											<li><i class="far fa-clock"></i> Published: {{ job.posted_date|timesince }} ago</li>
+										</ul>
+									</div>
+								</div>
+								<div class="d-flex">
+									<div class="job-time me-auto">
+										<a href="javascript:void(0);"><span>{{ job.job_type }}</span></a>
+									</div>
+									<div class="salary-bx">
+										<span>${{ job.salary_min }} - $ {{ job.salary_max }}</span>
+									</div>
+								</div>
+								<label class="like-btn">
+									<input type="checkbox">
+									<span class="checkmark"></span>
+								</label>
+							</div>
+						</li>
+						{% endfor %}
+					</ul>
+					<div class="pagination-bx style-1 m-t30">
+						<ul class="pagination">
+							<li class="previous"><a href="javascript:void(0);"><i class="ti-arrow-left"></i> Prev</a>
+							</li>
+							<li class="active"><a href="javascript:void(0);">1</a></li>
+							<li><a href="javascript:void(0);">2</a></li>
+							<li><a href="javascript:void(0);">3</a></li>
+							<li class="next"><a href="javascript:void(0);">Next <i class="ti-arrow-right"></i></a></li>
+						</ul>
+					</div>
+				</div>
+				<div class="col-xl-3 col-lg-4 col-md-5">
+					<div class="sticky-top">
+						<div class="candidates-are-sys m-b30">
+							<div class="candidates-bx">
+								<div class="testimonial-pic radius"><img src="images/testimonials/pic3.jpg" alt=""
+										width="100" height="100"></div>
+								<div class="testimonial-text">
+									<p>I just got a job that I applied for via careerfy! I used the site all the time
+										during my job hunt.</p>
+								</div>
+								<div class="testimonial-detail"> <strong class="testimonial-name">Richard
+										Anderson</strong> <span class="testimonial-position">Nevada, USA</span> </div>
+							</div>
+						</div>
+						<ul class="company-logo-wg sidebar bg-white job-bx m-b30 clearfix">
+							<li class="brand-logo">
+								<a href="javascript:void(0);">
+									<img src="images/logo/logo1.jpg" alt="">
+								</a>
+							</li>
+							<li class="brand-logo">
+								<a href="javascript:void(0);">
+									<img src="images/logo/logo2.jpg" alt="">
+								</a>
+							</li>
+							<li class="brand-logo">
+								<a href="javascript:void(0);">
+									<img src="images/logo/logo3.jpg" alt="">
+								</a>
+							</li>
+							<li class="brand-logo">
+								<a href="javascript:void(0);">
+									<img src="images/logo/logo4.jpg" alt="">
+								</a>
+							</li>
+							<li class="brand-logo">
+								<a href="javascript:void(0);">
+									<img src="images/logo/logo5.jpg" alt="">
+								</a>
+							</li>
+							<li class="brand-logo">
+								<a href="javascript:void(0);">
+									<img src="images/logo/logo6.jpg" alt="">
+								</a>
+							</li>
+							<li class="brand-logo">
+								<a href="javascript:void(0);">
+									<img src="images/logo/logo7.jpg" alt="">
+								</a>
+							</li>
+							<li class="brand-logo">
+								<a href="javascript:void(0);">
+									<img src="images/logo/logo8.jpg" alt="">
+								</a>
+							</li>
+							<li class="brand-logo">
+								<a href="javascript:void(0);">
+									<img src="images/logo/logo9.jpg" alt="">
+								</a>
+							</li>
+						</ul>
+						<div class="quote-bx">
+							<div class="quote-info">
+								<h4>Make a Difference with Your Online Resume!</h4>
+								<p>Your resume in minutes with JobBoard resume assistant is ready!</p>
+								<a href="register.html" class="site-button">Create an Account</a>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- Browse Jobs END -->
+</div>
+{% endblock %}

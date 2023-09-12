@@ -1,17 +1,17 @@
 {% extends 'base.html' %}
 {% load static %}
-{% block title %} All news {% endblock %}
+{% block title %} News in "{{ category.category_name }}"" category {% endblock %}
 {% block content %}
 <!-- inner page banner -->
 <div class="dez-bnr-inr overlay-black-middle" style="background-image:url({% static 'images/banner/bnr1.jpg' %});">
 	<div class="container">
 		<div class="dez-bnr-inr-entry">
-			<h1 class="text-white">Blog Left Images</h1>
+			<h1 class="text-white"> News in "{{ category.category_name }}"" category  </h1>
 			<!-- Breadcrumb row -->
 			<div class="breadcrumb-row">
 				<ul class="list-inline">
 					<li><a href="{% url 'home' %}">Home</a></li>
-					<li>Blog Left Images</li>
+					<li>Category news</li>
 				</ul>
 			</div>
 			<!-- Breadcrumb row END -->
@@ -25,7 +25,7 @@
 		<div class="row">
 			<!-- Left part start -->
 			<div class="col-xl-9 col-lg-8 col-md-7 m-b10">
-				{% for news in allNews %}
+				{% for news in news_in_category %}
 				<div class="blog-post blog-md clearfix">
 					<div class="dez-post-media dez-img-effect zoom-slow radius-sm"> <a href="{% url 'blog_details' news.id %}"><img
 								src="{{  news.image.url }}" alt="news.title"></a> </div>
