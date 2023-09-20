@@ -6,12 +6,12 @@
 <div class="dez-bnr-inr overlay-black-middle" style="background-image:url({% static 'images/banner/bnr1.jpg' %});">
 	<div class="container">
 		<div class="dez-bnr-inr-entry">
-			<h1 class="text-white">Blog Left Images</h1>
+			<h1 class="text-white">Interesting blogs</h1>
 			<!-- Breadcrumb row -->
 			<div class="breadcrumb-row">
 				<ul class="list-inline">
 					<li><a href="{% url 'home' %}">Home</a></li>
-					<li>Blog Left Images</li>
+					<li>List of Blogs</li>
 				</ul>
 			</div>
 			<!-- Breadcrumb row END -->
@@ -65,7 +65,7 @@
 					<ul class="pagination">
 						{% if allNews.has_previous %}
 						<li class="previous"><a href="?page={{ allNews.previous_page_number }}"><i
-									class="ti-arrow-left"></i> Prev</a></li>
+									class="fa fa-arrow-left"></i> Prev</a></li>
 						{% endif %}
 
 						{% for page_num in allNews.paginator.page_range %}
@@ -78,7 +78,7 @@
 
 						{% if allNews.has_next %}
 						<li class="next"><a href="?page={{ allNews.newxt_page_number }}">Next <i
-									class="ti-arrow-right"></i></a></li>
+									class="fa fa-arrow-right"></i></a></li>
 						{% endif %}
 					</ul>
 				</div>
@@ -89,11 +89,11 @@
 			<div class="col-xl-3 col-lg-4 col-md-5 sticky-top">
 				<aside class="side-bar">
 					<div class="widget">
-						<h6 class="widget-title style-1">Search</h6>
+						<h6 class="widget-title style-1">Search blog</h6>
 						<div class="search-bx style-1">
-							<form role="search" method="post">
+							<form role="search" method="GET" action="{% url 'search_news' %}">
 								<div class="input-group">
-									<input name="text" class="form-control" placeholder="Enter your keywords..."
+									<input name="keywords" class="form-control" placeholder="Enter the title or content..."
 										type="text">
 									<span class="input-group-btn">
 										<button type="submit" class="fa fa-search text-primary"></button>

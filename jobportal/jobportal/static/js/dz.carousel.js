@@ -9,7 +9,7 @@ jQuery(document).ready(function() {
 		margin:30,
 		nav:true,
 		dots: false,
-		navText: ['<i class="ti-angle-left"></i>', '<i class="ti-angle-right"></i>'],
+		navText: ['<i class="fa fa-chevron-left"></i>', '<i class="fa fa-chevron-right"></i>'],
 		responsive:{
 			0:{
 				items:1
@@ -34,7 +34,7 @@ jQuery(document).ready(function() {
 		margin:30,
 		nav:true,
 		dots: false,
-		navText: ['<i class="ti-angle-left"></i>', '<i class="ti-angle-right"></i>'],
+		navText: ['<i class="fa fa-chevron-left"></i>', '<i class="fa fa-chevron-right"></i>'],
 		responsive:{
 			0:{
 				items:1
@@ -63,7 +63,7 @@ jQuery(document).ready(function() {
 		navSpeed: 1000,
 		paginationSpeed: 1000,
 		slideSpeed: 1000,
-		navText: ['<i class="ti-angle-left"></i>', '<i class="ti-angle-right"></i>'],
+		navText: ['<i class="fa fa-chevron-left"></i>', '<i class="fa fa-chevron-right"></i>'],
 		responsive:{
 			0:{
 				items:1
@@ -99,7 +99,7 @@ jQuery(document).ready(function() {
 		navSpeed: 1000,
 		paginationSpeed: 1000,
 		slideSpeed: 1000,
-		navText: ['<i class="ti-angle-left"></i>', '<i class="ti-angle-right"></i>'],
+		navText: ['<i class="fa fa-chevron-left"></i>', '<i class="fa fa-chevron-right"></i>'],
 		responsive:{
 			0:{
 				items:1

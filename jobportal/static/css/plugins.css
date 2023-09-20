@@ -3,7 +3,7 @@
 ==========================*/
 @import url("../plugins/bootstrap/css/bootstrap.min.css");
 @import url("../plugins/font-awesome/css/all.min.css");
-@import url("../plugins/themify/themify-icons.css");
+@import url("https://cdn.jsdelivr.net/npm/@icon/themify-icons@1.0.1-alpha.3/themify-icons.min.css ");
 @import url("../plugins/owl-carousel/owl.carousel.css");
 @import url("../plugins/bootstrap-select/bootstrap-select.min.css");
 @import url("../plugins/magnific-popup/magnific-popup.css");

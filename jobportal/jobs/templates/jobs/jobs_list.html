@@ -74,7 +74,12 @@
 			<div class="row">
 				<div class="col-xl-9 col-lg-8 col-md-7">
 					<div class="job-bx-title clearfix">
-						<h5 class="font-weight-700 float-start text-uppercase">{{ jobs.count }} Jobs Found</h5>
+						{% if jobs %}
+						<h5 class="font-weight-700 float-start text-uppercase">{{ jobs.paginator.count }} Jobs Found
+						</h5>
+						{% else %}
+						<h5 class="font-weight-700 float-start text-uppercase">No Jobs Found</h5>
+						{% endif %}
 						<div class="float-end">
 							<span class="select-title">Sort by freshness</span>
 							<select>
@@ -96,7 +101,9 @@
 											</span></a>
 									</div>
 									<div class="job-post-info">
-										<h4><a href="{% url 'job_details' job.id %}">{{ job.title }} </a> <i>({{ job.area }})</i></h4>
+										<h4><a href="{% url 'job_details' job.id %}">{{ job.title }} </a>
+											<i>({{ job.area }})</i>
+										</h4>
 										<ul>
 											<li>
 												<i class="fas fa-map-marker-alt"></i>
@@ -125,11 +132,12 @@
 						{% endfor %}
 					</ul>
 
+					{% if jobs.paginator.count > 0 %}
 					<div class="pagination-bx style-1 m-t30">
 						<ul class="pagination">
 							{% if jobs.has_previous %}
 							<li class="previous">
-								<a href="?page={{ jobs.previous_page_number }}"><i class="ti-arrow-left"></i> Prev</a>
+								<a href="?page={{ jobs.previous_page_number }}"><i class="fa fa-arrow-left"></i> Prev</a>
 							</li>
 							{% endif %}
 
@@ -147,11 +155,12 @@
 
 							{% if jobs.has_next %}
 							<li class="next">
-								<a href="?page={{ jobs.next_page_number }}">Next <i class="ti-arrow-right"></i></a>
+								<a href="?page={{ jobs.next_page_number }}">Next <i class="fa fa-arrow-right"></i></a>
 							</li>
 							{% endif %}
 						</ul>
 					</div>
+					{% endif %}
 
 				</div>
 				<div class="col-xl-3 col-lg-4 col-md-5">
