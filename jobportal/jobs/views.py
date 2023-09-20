@@ -6,7 +6,7 @@ from utilities.paginator_page import paginate_queryset
 
 countries = Country.objects.all()
 companies = Company.objects.all()
-
+job_areas = JobPosition.objects.values_list('area', flat=True).distinct().exclude(area__isnull=True).exclude(area='')
 
 def alljobs(request):
     context = {
@@ -15,6 +15,25 @@ def alljobs(request):
         'companies': companies,
     }
     return render(request, 'jobs/jobs.html', context)
+
+# def alljobs(request):
+#     search_keywords = request.GET.get('keywords', '')
+#     search_locations = request.GET.get('location', '')
+    
+#     jobList = JobPosition.objects.filter(
+#         title__icontains=search_keywords,
+#         location__icontains=search_locations,
+#         is_active=True)
+    
+#     jobs = paginate_queryset(request, jobList, 4)
+    
+#     context = {
+#         'titlepage': 'All jobs',
+#         'countries': countries,
+#         'companies': companies,
+#         'jobs': jobs,
+#     }
+#     return render(request, 'jobs/jobs.html', context)
 
 
 def browse_job_by_country(request, country_name=None):
@@ -31,6 +50,7 @@ def browse_job_by_country(request, country_name=None):
         'countries': countries,
         'companies': companies,
         'selected_country': country_name,
+        'job_areas': job_areas,
     }
     
     return render(request, 'jobs/jobs_list.html', context)
@@ -57,9 +77,37 @@ def browse_job_by_company(request, company_name):
         'countries': countries,
         'companies': companies,
         'selected_company': company_name,
+        'job_areas': job_areas,
     }
     
     return render(request, 'jobs/jobs_list.html', context)
-   
+
+
+def job_search_result(request):
+    search_area = request.GET.get('job_area_name')
+    search_keywords = request.GET.get('keywords', '')
+    search_locations = request.GET.get('location', '')
+    
+    filters = {
+        'title__icontains': search_keywords,
+        'location__icontains': search_locations,
+        'is_active': True,
+    }
+    
+    if search_area and search_area != "Select Sector":
+        filters['area__icontains'] = search_area
+    
+    jobList = JobPosition.objects.filter(**filters)
+    
+    jobs = paginate_queryset(request, jobList, 4)
+    
+    context = {
+        'countries': countries,
+        'companies': companies,
+        'jobs': jobs,
+        'job_areas': job_areas,
+    }
+    
+    return render(request, 'jobs/jobs_list_results.html', context)
     
         

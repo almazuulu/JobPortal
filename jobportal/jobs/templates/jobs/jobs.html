@@ -9,10 +9,10 @@
 	<div class="container">
 		<div class="dez-bnr-inr-entry">
 			<div class="job-search-form">
-				<form>
+				<form method="GET" action="{% url 'job_search_results' %}">
 					<div class="input-group">
-						<input type="text" class="form-control" placeholder="Job Title, Keywords Or Company Name">
-						<input type="text" class="form-control" placeholder="City, Province Or Region">
+						<input type="text" class="form-control" placeholder="Job Title, Keywords Or Company Name" name="keywords">
+						<input type="text" class="form-control" placeholder="City, Province Or Region", name="location">
 						<div class="input-group-prepend">
 							<button class="site-button">Search</button>
 						</div>
