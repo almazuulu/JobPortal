@@ -27,9 +27,12 @@
 			<div class="col-xl-9 col-lg-8 col-md-7 m-b10">
 				{% for news in allNews %}
 				<div class="blog-post blog-md clearfix">
-					<div class="dez-post-media dez-img-effect zoom-slow radius-sm"> <a
-							href="{% url 'blog_details' news.id %}"><img src="{{  news.image.url }}"
-								alt="news.title"></a> </div>
+
+					<div class="dez-post-media dez-img-effect zoom-slow radius-sm">
+						<a href="{% url 'blog_details' news.id %}">
+							<img src="{{  news.image.url }}" alt="news.title">
+						</a>
+					</div>
 					<div class="dez-post-info">
 						<div class="dez-post-meta">
 							<ul class="d-flex align-items-center">
@@ -93,8 +96,8 @@
 						<div class="search-bx style-1">
 							<form role="search" method="GET" action="{% url 'search_news' %}">
 								<div class="input-group">
-									<input name="keywords" class="form-control" placeholder="Enter the title or content..."
-										type="text">
+									<input name="keywords" class="form-control"
+										placeholder="Enter the title or content..." type="text">
 									<span class="input-group-btn">
 										<button type="submit" class="fa fa-search text-primary"></button>
 									</span>
@@ -111,7 +114,7 @@
 										alt=""> </div>
 								<div class="dez-post-info">
 									<div class="dez-post-header">
-										<h6 class="post-title"><a href="blog-details.html">{{ rpost.title }}</a></h6>
+										<h6 class="post-title"><a href="{% url 'blog_details' rpost.id %}">{{ rpost.title }}</a></h6>
 									</div>
 									<div class="dez-post-meta">
 										<ul class="d-flex align-items-center">
