@@ -1,0 +1,60 @@
+{% extends 'base.html' %} {% load static %} {% block title %} Candidate Applied Jobs {% endblock %} {% block content %} <div class="content-block">
+	<!-- Browse Jobs -->
+	<div class="section-full bg-white p-t50 p-b20">
+		<div class="container">
+			<div class="row">
+				<div class="col-xl-3 col-lg-4 m-b30">
+					<div class="sticky-top">
+						<div class="candidate-info"> {% include 'includes/candidate_block.html' %} {% include 'includes/candidate_menu.html' %} </div>
+					</div>
+				</div>
+				<div class="col-xl-9 col-lg-8 m-b30">
+					<div class="job-bx-title clearfix">
+						<h5 class="font-weight-700 float-start text-uppercase">2269 Jobs Found</h5>
+						<div class="float-end">
+							<span class="select-title">Sort by freshness</span>
+							<select>
+								<option>Last 2 Months</option>
+								<option>Last Months</option>
+								<option>Last Weeks</option>
+								<option>Last 3 Days</option>
+							</select>
+						</div>
+					</div>
+					<ul class="post-job-bx browse-job"> {% for job in applied_jobs %} <li>
+							<div class="post-bx">
+								<div class="job-post-info m-a0">
+									<h4><a href="{% url 'job_details' job.id  %}">{{ job.title }}</a></h4>
+									<ul>
+										<li><a href="company-profile.html">@company-name</a></li>
+										<li><i class="fas fa-map-marker-alt"></i> {{ job.location }}, {{ job.country }} </li>
+										<li><i class="far fa-money-bill-alt"></i> {{ job.salary_min }} - <i class="far fa-money-bill-alt"></i> {{ job.salary_max }}</li>
+									</ul>
+									<div class="job-time m-t15 m-b10">
+										<a href="javascript:void(0);"><span>PHP</span></a>
+										<a href="javascript:void(0);"><span>Angular</span></a>
+										<a href="javascript:void(0);"><span>Bootstrap</span></a>
+										<a href="javascript:void(0);"><span>Wordpress</span></a>
+									</div>
+									<div class="posted-info clearfix">
+										<p class="m-tb0 text-primary float-start"><span class="text-black m-r10">Posted:</span> {{ job.posted_date|timesince }} ago</p>
+									</div>
+								</div>
+							</div>
+						</li> {% endfor %} </ul> {% if applied_jobs.paginator.count > 0 %} <div class="pagination-bx style-1 m-t30">
+						<ul class="pagination"> {% if applied_jobs.has_previous %} <li class="previous">
+								<a href="?page={{ applied_jobs.previous_page_number }}"><i class="fa fa-arrow-left"></i> Prev</a>
+							</li> {% endif %} {% for page_num in applied_jobs.paginator.page_range %} {% if applied_jobs.number == page_num %} <li class="active">
+								<a href="?page={{ page_num }}">{{ page_num }}</a>
+							</li> {% else %} <li>
+								<a href="?page={{ page_num }}">{{ page_num }}</a>
+							</li> {% endif %} {% endfor %} {% if applied_jobs.has_next %} <li class="next">
+								<a href="?page={{ applied_jobs.next_page_number }}">Next <i class="fa fa-arrow-right"></i></a>
+							</li> {% endif %} </ul>
+					</div> {% endif %}
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- Browse Jobs END -->
+</div> {% endblock %}

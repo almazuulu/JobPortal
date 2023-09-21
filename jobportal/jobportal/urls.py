@@ -24,6 +24,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('blogs/', include('blog.urls')),
     path('jobs/', include('jobs.urls')),
+    path('profiles/', include('jobprofiles.urls')),
 ]
 
 if settings.DEBUG:

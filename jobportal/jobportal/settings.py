@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'website',
     'blog',
     'jobs',
+    'jobprofiles',
 ]
 
 MIDDLEWARE = [

@@ -50,7 +50,7 @@ class JobPosition(models.Model):
     job_type = models.CharField(max_length=10, choices=JOB_TYPE_CHOICES, default=ONSITE)
 
     def __str__(self):
-        return self.title
+        return self.title + ' at ' + self.company.company_name
 
 
 class Company(models.Model):
