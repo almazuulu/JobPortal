@@ -1,8 +1,4 @@
-{% extends 'base.html' %}
-{% load static %}
-{% block title %} Login {% endblock %}
-{% block content %}
-<!-- inner page banner -->
+{% extends 'base.html' %} {% load static %} {% block title %} Login {% endblock %} {% block content %} <!-- inner page banner -->
 <div class="dez-bnr-inr overlay-black-middle bg-pt" style="background-image:url({% static 'images/banner/bnr2.jpg' %});">
 	<div class="container">
 		<div class="dez-bnr-inr-entry">
@@ -26,24 +22,19 @@
 		<div class="max-w500 m-auto bg-white m-b30">
 			<div class="p-a30 card browse-job radius-sm">
 				<div class="tab-content nav">
-					<form id="login" class="tab-pane active col-12 p-a0 ">
-						<h4 class="font-weight-700">LOGIN</h4>
+					<form id="login" class="tab-pane active col-12 p-a0 " method="POST" action="{% url 'login' %}"> {% csrf_token %} <h4 class="font-weight-700">LOGIN</h4>
 						<p class="font-weight-600">If you have an account with us, please log in.</p>
 						<div class="form-group">
-							<label class="font-weight-700">E-MAIL *</label>
-							<input name="dzName" required="" class="form-control" placeholder="Your Email Address"
-								type="email">
+							<label class="font-weight-700">Username *</label>
+							<input name="username" required class="form-control" placeholder="Your username" type="text">
 						</div>
 						<div class="form-group">
-							<label class="font-weight-700">PASSWORD *</label>
-							<input name="dzName" required="" class="form-control " placeholder="Type Password"
-								type="password">
+							<label class="font-weight-700">Password *</label>
+							<input name="password" required="" class="form-control " placeholder="Type Password" type="password">
 						</div>
 						<div class="text-left">
 							<button class="site-button m-r5 button-lg">login</button>
-							<a data-bs-toggle="tab" href="login.html#forgot-password"
-								class="m-l5 m-t15 forget-pass float-end"><i class="fa fa-unlock-alt"></i> Forgot
-								Password</a>
+							<a data-bs-toggle="tab" href="login.html#forgot-password" class="m-l5 m-t15 forget-pass float-end"><i class="fa fa-unlock-alt"></i> Forgot Password</a>
 						</div>
 					</form>
 					<form id="forgot-password" class="tab-pane fade  col-12 p-a0">
@@ -51,12 +42,10 @@
 						<p class="font-weight-600">We will send you an email to reset your password. </p>
 						<div class="form-group">
 							<label class="font-weight-700">E-MAIL *</label>
-							<input name="dzName" required="" class="form-control" placeholder="Your Email Address"
-								type="email">
+							<input name="dzName" required="" class="form-control" placeholder="Your Email Address" type="email">
 						</div>
 						<div class="text-left">
-							<a class="site-button outline gray button-lg" data-bs-toggle="tab"
-								href="login.html#login">Back</a>
+							<a class="site-button outline gray button-lg" data-bs-toggle="tab" href="login.html#login">Back</a>
 							<button class="site-button float-end button-lg">Submit</button>
 						</div>
 					</form>
@@ -79,7 +68,6 @@
 			<div class="modal-body row m-a0 clearfix">
 				<div class="col-lg-6 col-md-6 d-flex p-a0"
 					style="background-image: url({% static 'images/background/bg3.jpg' %});  background-position:center; background-size:cover;">
-
 				</div>
 				<div class="col-lg-6 col-md-6 p-a0">
 					<div class="lead-form browse-job text-left">
@@ -99,5 +87,4 @@
 				</div>
 			</div>
 		</div>
-	</div>
-	{% endblock %}
+	</div> {% endblock %}

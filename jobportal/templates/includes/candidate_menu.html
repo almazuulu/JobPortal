@@ -1,23 +1,17 @@
 {% with request.resolver_match.url_name as url_name %} <ul>
-        <li><a href="{% url 'candidate_profile' candidate.id %}" class="{% if url_name == 'candidate_profile' %} active {% endif %}">
+        <li><a href="{% url 'candidate_profile' candidate_id %}" class="{% if url_name == 'candidate_profile' %} active {% endif %}">
                         <i class="far fa-user" aria-hidden="true"></i>
                         <span>Profile</span></a></li>
         <li><a href="jobs-my-resume.html">
                         <i class="far fa-file-alt" aria-hidden="true"></i>
                         <span>My Resume</span></a></li>
-        <li><a href="{% url 'candidate_saved_jobs' candidate.id %}" class="{% if url_name == 'candidate_saved_jobs' %} active {% endif %}">
+        <li><a href="{% url 'candidate_saved_jobs' candidate_id %}" class="{% if url_name == 'candidate_saved_jobs' %} active {% endif %}">
                         <i class="far fa-heart" aria-hidden="true"></i>
                         <span>Saved Jobs</span></a></li>
-        <li><a href="{% url 'candidate_applied_jobs' candidate.id %}" class="{% if url_name == 'candidate_applied_jobs' %} active {% endif %}">
+        <li><a href="{% url 'candidate_applied_jobs' candidate_id %}" class="{% if url_name == 'candidate_applied_jobs' %} active {% endif %}">
                         <i class="fa fa-briefcase" aria-hidden="true"></i>
                         <span>Applied Jobs</span></a></li>
-        <li><a href="jobs-alerts.html">
-                        <i class="far fa-bell" aria-hidden="true"></i>
-                        <span>Job Alerts</span></a></li>
-        <li><a href="jobs-cv-manager.html">
-                        <i class="far fa-id-card" aria-hidden="true"></i>
-                        <span>CV Manager</span></a></li>
-        <li><a href="jobs-change-password.html">
+        <li><a href="{% url 'change_password' %}" class="{% if url_name == 'change_password' %} active {% endif %}">
                         <i class="fa fa-key" aria-hidden="true"></i>
                         <span>Change Password</span></a></li>
         <li><a href="index.html">

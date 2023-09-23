@@ -14,5 +14,4 @@ def about(request):
 def contact(request):
     return render(request, 'website/contact.html')
 
-def login(request):
-    return render(request, 'website/login.html')
+
