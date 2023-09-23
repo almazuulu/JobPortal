@@ -5,6 +5,7 @@ def user_type(request):
     context = {
         'is_candidate': False,
         'candidate_id': None,
+        'candidate': None,
     }
     
     if not request.user.is_authenticated:
@@ -17,7 +18,7 @@ def user_type(request):
         if context['is_candidate']:
             candidate_profile = CandidateProfile.objects.get(user_profile = user_profile)
             context['candidate_id'] = candidate_profile.id
-        
+            context['candidate']  = candidate_profile
         return context
     
     except(UserProfile.DoesNotExist, CandidateProfile.DoesNotExist):

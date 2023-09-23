@@ -1,4 +1,23 @@
-{% with request.resolver_match.url_name as url_name %} <ul>
+{% with request.resolver_match.url_name as url_name %} 
+<div class="candidate-detail text-center">
+        <div class="img-rounded">
+            <a href="javascript:void(0);">
+                <img alt="" src="{{ candidate.user_profile.profile_image.url }}" style="width: auto;">
+            </a>
+            <div class="upload-link" title="update" data-bs-toggle="tooltip" data-placement="right">
+                <input type="file" class="update-flie">
+                <i class="fa fa-camera"></i>
+            </div>
+        </div>
+        <div class="candidate-title">
+            <div class="">
+                <h4 class="m-b5">{{ candidate.full_name }}</h4>
+                <p class="m-b0">{{ candidate.current_job_title }}</p>
+            </div>
+        </div>
+</div>
+
+<ul>
         <li><a href="{% url 'candidate_profile' candidate_id %}" class="{% if url_name == 'candidate_profile' %} active {% endif %}">
                         <i class="far fa-user" aria-hidden="true"></i>
                         <span>Profile</span></a></li>
@@ -14,7 +33,8 @@
         <li><a href="{% url 'change_password' %}" class="{% if url_name == 'change_password' %} active {% endif %}">
                         <i class="fa fa-key" aria-hidden="true"></i>
                         <span>Change Password</span></a></li>
-        <li><a href="index.html">
+        <li><a href="{% url 'logout' %}">
                         <i class="fas fa-sign-out-alt" aria-hidden="true"></i>
                         <span>Log Out</span></a></li>
-</ul> {% endwith %}
+</ul> 
+{% endwith %}
