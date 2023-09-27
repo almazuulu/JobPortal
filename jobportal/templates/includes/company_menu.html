@@ -1,0 +1,37 @@
+{% with request.resolver_match.url_name as url_name %}
+{% load static %} 
+<div class="candidate-detail text-center">
+    <div class="img-rounded">
+        <a href="javascript:void(0);">
+            <img alt="company.company_name" src="{{ company.user_profile.profile_image.url }}" style="width: auto;">
+        </a>
+        <div class="upload-link" title="update" data-bs-toggle="tooltip" data-placement="right">
+            <input type="file" class="update-flie">
+            <i class="fa fa-camera"></i>
+        </div>
+    </div>
+    <div class="candidate-title">
+        <h4 class="m-b5"><a href="mailto:{{ company.email }}">{{ company.email }}</a></h4>
+    </div>
+</div>
+<ul>
+    <li><a href="{% url 'company_profile' company_id %}" class="{% if url_name == 'company_profile' %} active {% endif %}">
+        <i class="far fa-user" aria-hidden="true"></i> 
+        <span>Company Profile</span></a></li>
+        <li><a href="{% url 'post_job' %}" class="{% if url_name == 'post_job' %} active {% endif %}">
+        <i class="far fa-file-alt" aria-hidden="true"></i> 
+        <span>Post A Job</span></a></li>
+    <li><a href="{% url 'manage_jobs' company_id %}" class="{% if url_name == 'manage_jobs' %} active {% endif %}">
+        <i class="fa fa-briefcase" aria-hidden="true"></i> 
+        <span>Manage jobs</span></a></li>
+    <li><a href="{% url 'company_resume' %}" class="{% if url_name == 'company_resume' %} active {% endif %}">
+        <i class="far fa-id-card" aria-hidden="true"></i>
+        <span>Resume</span></a></li>
+    <li><a href="{% url 'change_password' %}" class="{% if url_name == 'change_password' %} active {% endif %}">
+            <i class="fa fa-key" aria-hidden="true"></i>
+            <span>Change Password</span></a></li>
+    <li><a href="index.html">
+        <i class="fas fa-sign-out-alt" aria-hidden="true"></i> 
+        <span>Log Out</span></a></li>
+</ul>
+{% endwith %}

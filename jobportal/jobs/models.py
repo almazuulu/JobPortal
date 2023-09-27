@@ -25,7 +25,8 @@ class JobPosition(models.Model):
     ]
 
     title = models.CharField(max_length=255)
-    company = models.ForeignKey('Company', on_delete=models.CASCADE)
+    company = models.ForeignKey('jobprofiles.CompanyProfile', on_delete=models.CASCADE, null=True, blank=True)
+    # company = models.ForeignKey('Company', on_delete=models.CASCADE)
     posted_date = models.DateTimeField(auto_now_add=True)
     deadline = models.DateField()
     location = models.CharField(max_length=255)
@@ -49,19 +50,14 @@ class JobPosition(models.Model):
     is_active = models.BooleanField(default=True)
     job_type = models.CharField(max_length=10, choices=JOB_TYPE_CHOICES, default=ONSITE)
 
+
     def __str__(self):
         return self.title + ' at ' + self.company.company_name
-
-
-class Company(models.Model):
-    company_name = models.CharField(max_length=255)
-    company_logo = models.ImageField(upload_to='photos/company_logos/', blank=True, null=True, default='photos/default_img.png')  # Added this line
-    company_description = models.TextField(blank=True, null=True)
-
-    class Meta:
-        verbose_name = 'Company'
-        verbose_name_plural = 'Companies'
     
-    def __str__(self):
-        return self.company_name
+    
+    def company_logo(self):
+        return self.company.user_profile.profile_image
+    
+    
+    
 

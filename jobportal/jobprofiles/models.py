@@ -21,8 +21,10 @@ class UserProfile(models.Model):
     def is_candidate(self):
         return hasattr(self, 'candidateprofile')
     
+    def is_company(self):
+        return hasattr(self, 'companyprofile')
     
-
+    
 class CandidateProfile(models.Model):
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     age = models.IntegerField(null=True, blank=True)
@@ -33,8 +35,8 @@ class CandidateProfile(models.Model):
     current_salary = models.DecimalField(max_digits=9, decimal_places=2, blank=True, null=True)
     expected_salary = models.DecimalField(max_digits=9, decimal_places=2, blank=True, null=True)
     resume = models.FileField(upload_to='resumes/', null=True, blank=True)
-    applied_jobs = models.ManyToManyField(JobPosition, related_name='applicants', blank=True)
-    favorited_jobs = models.ManyToManyField(JobPosition, related_name='favorited_by', blank=True)
+    applied_jobs = models.ManyToManyField('jobs.JobPosition', related_name='applicants', blank=True)
+    favorited_jobs = models.ManyToManyField('jobs.JobPosition', related_name='favorited_by', blank=True)
     
     
     def full_name(self):
@@ -42,4 +44,38 @@ class CandidateProfile(models.Model):
     
     def email(self):
         return self.user_profile.user.email
+    
+    
+class CompanyProfile(models.Model):
+    user_profile = models.OneToOneField(UserProfile, on_delete=models.CASCADE)
+    company_name = models.CharField(max_length=255)
+    website = models.URLField(blank=True, null=True)
+    description = models.TextField(blank=True, null=True)
+      
+    # Social Links
+    facebook = models.URLField(blank=True, null=True)
+    twitter = models.URLField(blank=True, null=True)
+    google = models.URLField(blank=True, null=True)
+    linkedin = models.URLField(blank=True, null=True)
+    
+    def __str__(self):
+        return self.company_name
+    
+    def founded_date(self):
+        return self.user_profile.date_of_birth
+
+    def country (self):
+        return self.user_profile.country
+        
+    def email(self):
+        return self.user_profile.user.email
+    
+    def city(self):
+        return self.user_profile.city
+    
+    def company_logo(self):
+        return self.user_profile.profile_image
+
+    def full_name(self):
+        return self.user_profile.user.get_full_name()
     

@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import CandidateProfile, UserProfile
+from .models import CandidateProfile, UserProfile, CompanyProfile
 from django.utils.html import format_html
 
 @admin.register(UserProfile)
@@ -31,4 +31,15 @@ class CandidateProfileAdmin(admin.ModelAdmin):
     def email(self, obj):
         return obj.user_profile.user.email 
     
+    
+@admin.register(CompanyProfile)
+class CompanyProfileAdmin(admin.ModelAdmin):
+    list_display = ['thumbnail', 'company_name', 'city',  'email', 'website']
+    list_display_links = ['company_name']
+    
+    def thumbnail(self, object):
+        if object.user_profile.profile_image and hasattr(object.user_profile.profile_image, 'file'):
+            html_code = '<img src = "{}" width = "25px;" style = "border-radius: 50px;"/>'
+            return format_html(html_code.format(object.user_profile.profile_image.url))
+        return "No Image"
     

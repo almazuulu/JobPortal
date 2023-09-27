@@ -1,11 +1,12 @@
 from django.shortcuts import render, get_object_or_404
-from .models import Country, Company, JobPosition
+from .models import Country, JobPosition
+from jobprofiles.models import CompanyProfile
 from blog.views import topRecentNews
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from utilities.paginator_page import paginate_queryset
 
 countries = Country.objects.all()
-companies = Company.objects.all()
+companies = CompanyProfile.objects.all()
 job_areas = JobPosition.objects.values_list('area', flat=True).distinct().exclude(area__isnull=True).exclude(area='')
 
 def alljobs(request):

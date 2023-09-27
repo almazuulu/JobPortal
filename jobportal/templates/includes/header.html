@@ -37,9 +37,16 @@
                         <a href="index.html"><img src="{% static 'images/logo-white.png' %}" alt=""></a>
                     </div>
                     <ul class="nav navbar-nav">
-                        <li><a href="{% url 'home' %}" class="{% if url_name == 'home' %} active {% endif %}">Home</a></li> {% if user.is_authenticated %} {% if is_candidate %} <li><a
-                                href="{% url 'candidate_profile' candidate_id %}" class="dez-page">Candidate Profile</a></li> {% else %} <li><a href="#" class="dez-page">Company
-                                Profile</a></li> {% endif %} {% endif %} <li><a href="{% url 'jobs' %}" class="dez-page">Jobs</a></li>
+                        <li>
+                            <a href="{% url 'home' %}" class="{% if url_name == 'home' %} active {% endif %}">Home</a></li> 
+                            {% if user.is_authenticated %} 
+                            {% if is_candidate %} 
+                            <li><a href="{% url 'candidate_profile' candidate_id %}" class="dez-page">Candidate Profile</a></li> 
+                            {% elif is_company %} 
+                            <li><a href="{% url 'company_profile' company_id %}" class="dez-page">Company Profile</a></li> 
+                            {% endif %} 
+                            {% endif %} 
+                        <li><a href="{% url 'jobs' %}" class="dez-page">Jobs</a></li>
                         <li><a href="{% url 'blogs' %}" class="dez-page {% if url_name == 'blogs' %} active {% endif %}">Blogs</a></li>
                         <li><a href="{% url 'contact' %}" class="dez-page {% if url_name == 'contact' %} active {% endif %}">Contact Us</a></li>
                         <li><a href="{% url 'about' %}" class="dez-page {% if url_name == 'about' %} active {% endif %}">About Us</a></li>

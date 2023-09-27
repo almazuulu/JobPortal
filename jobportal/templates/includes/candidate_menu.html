@@ -18,9 +18,11 @@
 </div>
 
 <ul>
+
         <li><a href="{% url 'candidate_profile' candidate_id %}" class="{% if url_name == 'candidate_profile' %} active {% endif %}">
                         <i class="far fa-user" aria-hidden="true"></i>
                         <span>Profile</span></a></li>
+        
         <li><a href="jobs-my-resume.html">
                         <i class="far fa-file-alt" aria-hidden="true"></i>
                         <span>My Resume</span></a></li>
@@ -36,5 +38,6 @@
         <li><a href="{% url 'logout' %}">
                         <i class="fas fa-sign-out-alt" aria-hidden="true"></i>
                         <span>Log Out</span></a></li>
+    
 </ul> 
 {% endwith %}

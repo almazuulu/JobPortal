@@ -1,5 +1,5 @@
-from django.shortcuts import render, redirect
-from .models import CandidateProfile
+from django.shortcuts import render, redirect, get_object_or_404
+from .models import CandidateProfile, CompanyProfile
 from utilities.paginator_page import paginate_queryset
 from django.contrib import auth
 from django.contrib.auth.models import User
@@ -8,6 +8,7 @@ from .forms import UserRegisterForm, UserProfileForm, CandidateProfileForm
 from django.contrib.auth.forms import PasswordChangeForm
 from jobs.models import JobPosition
 from django.contrib.auth import update_session_auth_hash
+
 
 def login(request):
     if request.method == 'POST':
@@ -90,7 +91,6 @@ def change_password(request):
             
             
         
-      
             
 @login_required(login_url='login')
 def candidate_profile(request, candidate_id):
@@ -125,4 +125,38 @@ def candidate_saved_jobs(request, candidate_id):
     }
     
     return render(request, 'jobprofiles/candidate_saved_jobs.html', context)
+
+# Company Profile
+def company_profile(request, company_id):
+    company = CompanyProfile.objects.get(id=company_id)
+    context = {
+        'company': company
+    }
+    return render(request, 'jobprofiles/company_profile.html', context)
+
+def manage_jobs(request, company_id):
+    company = get_object_or_404(CompanyProfile, id=company_id)
+    jobsList = JobPosition.objects.filter(company=company)
+    jobs = paginate_queryset(request, jobsList, 3)
+    
+    context = {
+        'company': company,
+        'jobs': jobs,
+    }
+    return render(request, 'jobprofiles/company_manage_job.html', context)
+
+
+def company_resume(request):
+    context = {
+        
+    }
+    return render(request, 'jobprofiles/company_resume.html', context)
+    
+    
+def post_job(request):
+    context = {
+        
+    }
+    return render(request, 'jobprofiles/company_post_jobs.html', context)
+    
     
