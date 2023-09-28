@@ -11,13 +11,10 @@ class ChangePasswordForm(PasswordChangeForm):
     new_password2 = forms.CharField(widget=forms.PasswordInput(attrs={'class': 'form-control'}))
 
 
-class UserRegisterForm(UserCreationForm):
-    email = forms.EmailField()
-    
+class UserRegisterForm(UserCreationForm):           
     class Meta:
-        model = User 
+        model = User
         fields = ['username', 'first_name', 'last_name', 'email', 'password1', 'password2']
-        
         widgets = {
             'username': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Username'}),
             'first_name': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'First Name'}),
@@ -26,6 +23,7 @@ class UserRegisterForm(UserCreationForm):
             'password1': forms.PasswordInput(attrs={'class': 'form-control', 'placeholder': 'Type Password'}),
             'password2': forms.PasswordInput(attrs={'class': 'form-control', 'placeholder': 'Confirm Password'}),
         }
+
         
 
 class UserProfileForm(forms.ModelForm):    

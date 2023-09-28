@@ -38,21 +38,17 @@ def register(request):
         
         user_form = UserRegisterForm(request.POST)
         profile_form = UserProfileForm(request.POST)
-       
         
         if form_type == 'candidate':
             candidate_form = CandidateProfileForm(request.POST)
             if user_form.is_valid() and profile_form.is_valid() and candidate_form.is_valid():
                 user = user_form.save()
-                
                 profile = profile_form.save(commit=False)
                 profile.user = user
                 profile.save()
-                
                 candidate = candidate_form.save(commit=False)
                 candidate.user_profile = profile
                 candidate.save()
-                
                 applied_jobs_ids = request.POST.getlist('applied_jobs')
                 saved_jobs_ids = request.POST.getlist('favorited_jobs')
                 
@@ -62,37 +58,35 @@ def register(request):
                 
                 candidate.applied_jobs.set(applied_jobs)
                 candidate.favorited_jobs.set(saved_jobs)
-                
                 return redirect('login')
-        
+                
         elif form_type == 'company':
             company_form = CompanyProfileForm(request.POST)
             if user_form.is_valid() and profile_form.is_valid() and company_form.is_valid():
                 user = user_form.save()
-                
                 profile = profile_form.save(commit=False)
                 profile.user = user
                 profile.save()
-                
                 company = company_form.save(commit=False)
                 company.user_profile = profile
                 company.save()
-
+                # Обработка других полей и редирект, если необходимо
                 return redirect('login')
     else:
         user_form = UserRegisterForm()
         profile_form = UserProfileForm()
         candidate_form = CandidateProfileForm()
         company_form = CompanyProfileForm()
-    
+
     context = {
         'user_form': user_form,
         'profile_form': profile_form,
         'candidate_form': candidate_form,
-        'company_form': company_form,
+        'company_form': company_form
     }
-    
+
     return render(request, 'jobprofiles/register.html', context)
+
 
 @login_required(login_url='login')
 def change_password(request):

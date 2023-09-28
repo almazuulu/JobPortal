@@ -1,89 +1,70 @@
-{% extends 'base.html' %} 
-{% load static %} {% block title %} Register user {% endblock %}
-{% block content %} <!-- inner page banner -->
-<div class="dez-bnr-inr overlay-black-middle bg-pt" style="background-image:url(images/banner/bnr2.jpg);">
-	<div class="container">
-		<div class="dez-bnr-inr-entry">
-			<h1 class="text-white">Register</h1>
-			<!-- Breadcrumb row -->
-			<div class="breadcrumb-row">
-				<ul class="list-inline">
-					<li><a href="index.html">Home</a></li>
-					<li>Register</li>
-				</ul>
-			</div>
-			<!-- Breadcrumb row END -->
-		</div>
-	</div>
+{% extends 'base.html' %}
+{% load static %}
+{% load widget_tweaks %}
+{% block title %} Register {% endblock %}
+
+{% block content %}
+<div class="container">
+    <h2>Register</h2>
+    <div class="tabs">
+        <div class="tab-link active" id="tab-link-candidate">Register as Candidate</div>
+        <div class="tab-link" id="tab-link-company">Register as Company</div>
+    </div>
+
+    <div id="register-candidate" class="tab-content">
+        <h3>Register as Candidate</h3>
+        <form method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            <input type="hidden" name="form_type" value="candidate" />
+            {{ user_form.as_p }}
+            {{ profile_form.as_p }}
+            {{ candidate_form.as_p }}
+            <div class="d-flex justify-content-center mt-3">
+                <button type="submit" class="btn btn-primary">Create</button>
+            </div>
+        </form>
+    </div>
+
+    <div id="register-company" class="tab-content" style="display:none;">
+        <h3>Register as Company</h3>
+        <form method="post" enctype="multipart/form-data" class="form-group">
+            {% csrf_token %}
+            <input type="hidden" name="form_type" value="company" />
+			<label>{{ user_form.username.label }}</label>
+			{{ user_form.username|add_class:"form-control" }}
+			<label>{{ user_form.email.label }}</label>
+			{{ user_form.email|add_class:"form-control" }}
+			<label>{{ user_form.password1.label }}</label>
+			{{ user_form.password1|add_class:"form-control" }}
+			<label>{{ user_form.password2.label }}</label>
+			{{ user_form.password2|add_class:"form-control" }}
+			
+            {{ profile_form.as_p }}
+            {{ company_form.as_p }}
+            <div class="d-flex justify-content-center mt-3">
+                <button type="submit" class="btn btn-primary">Create</button>
+            </div>
+        </form>
+    </div>
 </div>
-<!-- inner page banner END -->
-<!-- contact area -->
-<div class="section-full content-inner browse-job bg-white shop-account">
-	<!-- Product -->
-	<div class="container">
-
-		<div class="tabs">
-			<div class="tab-link active" id="tab-link-candidate">
-				Register as Candidate
-			</div>
-			<div class="tab-link" id="tab-link-company">
-				Register as Company
-			</div>
-		</div>
-
-		<div class="tab-content" id="register-candidate">
-			<h3> Register as Candidate</h3>
-			<form method="POST" enctype="multipart/form-data">
-				{% csrf_token %}
-				<input type="hidden" name="form-type" value="candidate">
-				{{ user_form.as_p }}
-				{{ profile_form.as_p }}
-				{{ candidate_form.as_p }}
-
-				<div class="d-flex justify-content-center mt-3">
-					<button class="btn btn-primary" type="submit">
-						Create
-					</button>
-				</div>
-			</form>
-		</div>
 
 
-		<div class="tab-content" id="register-company">
-			<h3> Register as Company</h3>
-			<form method="POST" enctype="multipart/form-data">
-				{% csrf_token %}
-				<input type="hidden" name="form-type" value="company">
-				{{ user_form.as_p }}
-				{{ profile_form.as_p }}
-				{{ company_form.as_p }}
-				<div class="d-flex justify-content-center mt-3">
-					<button class="btn btn-primary" type="submit">
-						Create
-					</button>
-				</div>
-			</form>
-		</div>
-	</div>
-	<!-- Product END -->
-</div>
-<!-- contact area  END --> 
 {% block extra_js %}
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 <script>
-	$('#tab-link-candidate').on('click', function() {
-		$('.tab-link').removeClass('active');
-		$(this).addClass('active');
-		$('.tab-content').hide();
-		$('#register-candidate').show();
-	});
+    $('#tab-link-candidate').on('click', function() {
+        $('.tab-link').removeClass('active');
+        $(this).addClass('active');
+        $('.tab-content').hide();
+        $('#register-candidate').show();
+    });
 
-	$('#tab-link-company').on('click', function() {
-		$('.tab-link').removeClass('active');
-		$(this).addClass('active');
-		$('.tab-content').hide();
-		$('#register-company').show();
-	});
+    $('#tab-link-company').on('click', function() {
+        $('.tab-link').removeClass('active');
+        $(this).addClass('active');
+        $('.tab-content').hide();
+        $('#register-company').show();
+    });
 </script>
 {% endblock %}
 {% endblock %}
