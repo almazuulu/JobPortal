@@ -2,6 +2,23 @@
 {% load static %} 
 {% block title %} Company Manage Job {% endblock %} 
 {% block content %}
+
+<style>
+	.link-button {
+		background: none;
+		border: none;
+		padding: 0;
+		font: inherit;
+		color: blue;
+		cursor: pointer;
+		text-decoration: underline;
+	}
+
+	.link-button:hover{
+		text-decoration: none;
+	}
+
+</style>
 <!-- contact area -->
 <div class="content-block">
 	<!-- Browse Jobs -->
@@ -32,6 +49,7 @@
 								</select>
 							</div>
 						</div>
+						{% if jobs.paginator.count > 0 %}
 						<table class="table-job-bx cv-manager company-manage-job">
 							<thead>
 								<tr>
@@ -57,7 +75,7 @@
 										</div>
 									</td>
 									<td class="job-name">
-										<a href="javascript:void(0);">{{ job.title }}</a>
+										<a href="{% url 'job_details' job.id %}">{{ job.title }}</a>
 										<ul class="job-post-info">
 											<li><i class="fas fa-map-marker-alt"></i> {{ job.location }}, {{ job.country }}</li>
 											<li><i class="far fa-bookmark"></i> {{ job.job_type }}</li>
@@ -75,12 +93,22 @@
 									<td class="job-links">
 										<a href="javascript:void(0);" data-bs-toggle="modal" data-bs-target="#jobposition{{ forloop.counter }}">
 										<i class="fa fa-eye"></i></a>
-										<a href="javascript:void(0);"><i class="fa fa-trash"></i></a>
+
+										<form method="POST" action="{% url 'delete_job' job.id %}">
+											{% csrf_token %}
+											<!-- <a href="javascript:void(0);"><i class="fa fa-trash"></i></a> -->
+											<button type="submit" class="link-button"><i class="fa fa-trash"></i></button>
+										</form>
 									</td>
 								</tr>
 								{% endfor %}
 							</tbody>
 						</table>
+						{% else %}
+						<h5 class="text-center">
+							No jobs
+						</h5>
+						{% endif %}
 					
 					{% if jobs.paginator.count > 0 %}
 					<div class="pagination-bx style-1 m-t30">

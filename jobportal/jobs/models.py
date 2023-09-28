@@ -26,7 +26,6 @@ class JobPosition(models.Model):
 
     title = models.CharField(max_length=255)
     company = models.ForeignKey('jobprofiles.CompanyProfile', on_delete=models.CASCADE, null=True, blank=True)
-    # company = models.ForeignKey('Company', on_delete=models.CASCADE)
     posted_date = models.DateTimeField(auto_now_add=True)
     deadline = models.DateField()
     location = models.CharField(max_length=255)

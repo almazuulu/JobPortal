@@ -13007,3 +13007,23 @@ ol.commentlist li .star-rating {
     background-color: var(--primary);
     border-color: var(--primary);
 }
+
+.tabs {
+    display: flex;
+    cursor: pointer;
+    margin-bottom: 20px;
+}
+
+.tab-link {
+    flex: 1;
+    padding: 10px;
+    text-align: center;
+    background-color: #e0e0e0;
+    color: #000;
+    border: 1px solid #ccc;
+}
+
+.tab-link.active {
+    background-color: #007bff;
+    color: #fff;
+}
