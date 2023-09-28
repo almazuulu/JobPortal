@@ -63,6 +63,8 @@
 				</div>
 				{% endfor %}
 
+
+				{% if allNews.paginator.count > 0 %}
 				<!-- Pagination start -->
 				<div class="pagination-bx clearfix text-center">
 					<ul class="pagination">
@@ -86,6 +88,9 @@
 					</ul>
 				</div>
 				<!-- Pagination END -->
+				{% else %}
+					<h4> Sorry, there is no blogs here</h4>
+				{% endif %}
 			</div>
 			<!-- Left part END -->
 			<!-- Side bar start -->

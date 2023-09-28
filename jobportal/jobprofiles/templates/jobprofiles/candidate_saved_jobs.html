@@ -15,7 +15,7 @@
 				<div class="col-xl-9 col-lg-8 m-b30">
 					<div class="job-bx save-job table-job-bx clearfix">
 						<div class="job-bx-title clearfix">
-							<h5 class="font-weight-700 float-start text-uppercase">269 Saved Jobs</h5>
+							<h5 class="font-weight-700 float-start text-uppercase">{{ savedJobs.paginator.count }} Saved Jobs</h5>
 							<div class="float-end">
 								<span class="select-title">Sort by freshness</span>
 								<select>
@@ -26,6 +26,8 @@
 								</select>
 							</div>
 						</div>
+
+						{% if savedJobs.paginator.coun > 0 %}
 						<table>
 							<thead>
 								<tr>
@@ -51,7 +53,12 @@
 										<a href="javascript:void(0);"><i class="ti-trash"></i></a>
 									</td>
 								</tr> {% endfor %} </tbody>
-						</table> {% if savedJobs.paginator.count > 0 %} <div class="pagination-bx style-1 m-t30">
+						</table>
+						{% else %}
+							<h5> No saved jobs yet</h5> 
+						{% endif %}
+						
+						{% if savedJobs.paginator.count > 0 %} <div class="pagination-bx style-1 m-t30">
 							<ul class="pagination"> {% if savedJobs.has_previous %} <li class="previous">
 									<a href="?page={{ savedJobs.previous_page_number }}"><i class="fa fa-arrow-left"></i> Prev</a>
 								</li> {% endif %} {% for page_num in savedJobs.paginator.page_range %} {% if savedJobs.number == page_num %} <li class="active">

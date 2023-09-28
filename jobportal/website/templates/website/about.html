@@ -79,6 +79,7 @@
 		</div>
 	</div>
 	<!-- Why Chose Us -->
+	{% if topRecentNews %}
 	<!-- Our Latest Blog -->
 	<div class="section-full content-inner-2">
 		<div class="container">
@@ -87,6 +88,7 @@
 				<p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the
 					industry's standard dummy.</p>
 			</div>
+			
 			<div class="blog-carousel owl-carousel owl-btn-center-lr owl-btn-3 owl-theme owl-btn-center-lr owl-btn-1">
 				{% for news in topRecentNews %}
 				<div class="item">
@@ -123,9 +125,11 @@
 				{% endfor %}
 
 			</div>
+		
 		</div>
 	</div>
 	<!-- Our Latest Blog -->
+	{% endif %}
 </div>
 <!-- contact area END -->
 {% endblock %}
