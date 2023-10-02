@@ -4,19 +4,7 @@
 {% block content %}
 
 <style>
-	.link-button {
-		background: none;
-		border: none;
-		padding: 0;
-		font: inherit;
-		color: blue;
-		cursor: pointer;
-		text-decoration: underline;
-	}
-
-	.link-button:hover{
-		text-decoration: none;
-	}
+	
 
 </style>
 <!-- contact area -->
@@ -82,8 +70,11 @@
 											<li><i class="fa fa-filter"></i> {{ job.designation }}</li>
 										</ul>
 									</td>
-									<td class="application text-primary">(5) Applications</td>
-
+									{% if job.applicants.count > 0 %}
+									<td class="application text-primary">({{ job.applicants.count }}) Applications</td>
+									{% else %}
+									<td class="application text-primary">No Applications</td>
+									{% endif %}
 									{% if job.is_active %}
 										<td class="expired success"> Active </td>
 									{% else %}
@@ -97,7 +88,13 @@
 										<form method="POST" action="{% url 'delete_job' job.id %}">
 											{% csrf_token %}
 											<!-- <a href="javascript:void(0);"><i class="fa fa-trash"></i></a> -->
-											<button type="submit" class="link-button"><i class="fa fa-trash"></i></button>
+											<button type="submit" class="link-button-fa"><i class="fa fa-trash"></i></button>
+										</form>
+										
+										<form method="POST" action="{% url 'edit_job' job.id %}">
+											{% csrf_token %}
+											<!-- <a href="javascript:void(0);"><i class="fa fa-trash"></i></a> -->
+											<button type="submit" class="link-button-fa"><i class="fa fa-pencil"></i></button>
 										</form>
 									</td>
 								</tr>

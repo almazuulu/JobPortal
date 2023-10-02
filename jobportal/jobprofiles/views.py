@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect, get_object_or_404
-from .models import CandidateProfile, CompanyProfile
+from .models import CandidateProfile, CompanyProfile, UserProfile
 from utilities.paginator_page import paginate_queryset
 from django.contrib import auth
 from django.contrib.auth.models import User
@@ -141,6 +141,45 @@ def candidate_saved_jobs(request, candidate_id):
     
     return render(request, 'jobprofiles/candidate_saved_jobs.html', context)
 
+@login_required(login_url='login')
+def apply_for_job(request, job_id):
+    user_profile = get_object_or_404(UserProfile, user=request.user)
+    
+    if not user_profile.is_candidate():
+        return HttpResponseForbidden('User is not candidate!')
+    
+    candidate_profile = user_profile.candidateprofile
+    job = get_object_or_404(JobPosition, id=job_id)
+    candidate_profile.applied_jobs.add(job)
+    
+    return redirect('candidate_applied_jobs', candidate_profile.id)
+
+
+@login_required(login_url='login')
+def save_job(request, job_id):
+    user_profile = get_object_or_404(UserProfile, user=request.user)
+    
+    if not user_profile.is_candidate():
+        return HttpResponseForbidden('User is not candidate!')
+    
+    candidate_profile = user_profile.candidateprofile
+    job = get_object_or_404(JobPosition, id=job_id)
+    candidate_profile.favorited_jobs.add(job)
+    
+    return redirect('candidate_saved_jobs', candidate_profile.id)
+
+@login_required(login_url='login')
+def remove_favorited_job(request, job_id):
+    user_profile = get_object_or_404(UserProfile, user=request.user)
+    if not user_profile.is_candidate():
+        return HttpResponseForbidden('User is not candidate!')
+    
+    job = get_object_or_404(JobPosition, id=job_id)
+    candidate_profile = user_profile.candidateprofile
+    candidate_profile.favorited_jobs.remove(job)
+    
+    return redirect('candidate_saved_jobs', candidate_profile.id)
+
 # Company Profile
 def company_profile(request, company_id):
     company = CompanyProfile.objects.get(id=company_id)
@@ -151,7 +190,7 @@ def company_profile(request, company_id):
 
 def manage_jobs(request, company_id):
     company = get_object_or_404(CompanyProfile, id=company_id)
-    jobsList = JobPosition.objects.filter(company=company)
+    jobsList = JobPosition.objects.filter(company=company)    
     jobs = paginate_queryset(request, jobsList, 3)
     
     context = {
@@ -168,10 +207,40 @@ def delete_job(request, job_id):
     
     return redirect('manage_jobs', company)
 
+@login_required(login_url='login')
+def edit_job(request, job_id):
+    user = request.user
+    company_id = user.userprofile.companyprofile.id
+    
+    job = get_object_or_404(JobPosition, id=job_id)
+    if request.method == 'POST':
+        form = JobPositionForm(request.POST, instance=job)
+        if form.is_valid():
+            form.save()
+            return redirect('manage_jobs', company_id)
+        else:
+            form = JobPositionForm(instance=job)
+    
+    context = {
+        'form': form,
+        'job': job,
+    }
+    
+    return render(request, 'jobprofiles/company_edit_job.html', context)
+        
 
 def company_resume(request):
+    user = request.user
+    if not(hasattr(user, 'userprofile') and hasattr(user.userprofile, 'companyprofile')):
+        return HttpResponseForbidden()
+    
+    company_profile = CompanyProfile.objects.get(user_profile__user=user)
+    job_positions = JobPosition.objects.filter(company=company_profile)
+    applicantsList = CandidateProfile.objects.filter(applied_jobs__in=job_positions).distinct()
+    applicants =  paginate_queryset(request, applicantsList, 3)
+    
     context = {
-        
+        'applicants': applicants,
     }
     return render(request, 'jobprofiles/company_resume.html', context)
     
@@ -197,6 +266,7 @@ def post_job(request):
     context = {
         'form': form,
     }
-    return render(request, 'jobprofiles/company_post_jobs.html', context)
+    return render(request, 'jobprofiles/company_post_jobs.html', context)    
     
+
     

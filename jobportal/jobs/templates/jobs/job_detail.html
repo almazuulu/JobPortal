@@ -71,7 +71,11 @@
 						<ul class="list-num-count no-round">
 							{{ job.job_requirements|linebreaks }}
 						</ul>
-						<a href="jobs-applied-job.html" class="site-button">Apply This Job</a>
+						<form method="POST" action="{% url 'apply_for_job' job.id %}">
+							{% csrf_token %}
+							<button type="submit"  class="btn btn-primary" >Apply This Job</button>
+						</form>
+						
 					</div>
 				</div>
 			</div>
@@ -94,7 +98,7 @@
 							<div class="dez-post-meta ">
 								<ul>
 									<li class="post-author"><i class="ti-user"></i>By <a
-											href="author-detail.html#">{{ news.author }}</a> </li>
+											href="author-detail.hatml#">{{ news.author }}</a> </li>
 								</ul>
 							</div>
 							{% autoescape off %}

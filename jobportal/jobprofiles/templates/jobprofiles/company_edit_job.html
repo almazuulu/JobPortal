@@ -1,0 +1,39 @@
+{% extends 'base.html' %} 
+{% load static %} 
+{% block title %} Edit job {% endblock %} 
+{% block content %}
+<!-- contact area -->
+<div class="content-block">
+	<!-- Browse Jobs -->
+	<div class="section-full bg-white p-t50 p-b20">
+		<div class="container">
+			<div class="row">
+				<div class="col-xl-3 col-lg-4 m-b30">
+					<div class="sticky-top">
+						<div class="candidate-info company-info">
+							{% include 'includes/company_menu.html' %}
+						</div>
+					</div>
+				</div>
+				<div class="col-xl-9 col-lg-8 m-b30">
+					<div class="job-bx submit-resume">
+						<div class="job-bx-title clearfix">
+							<h5 class="font-weight-700 float-start text-uppercase">Post A Job</h5>
+							<a href="#" class="site-button right-arrow button-sm float-end">Back</a>
+						</div>
+						<form method="POST" enctype="multipart/form-data" action="{% url 'edit_job' job.id %}">
+							{% csrf_token %}
+							{{ form.as_p }}
+							<div class="text-center">
+								<button type="submit" class="btn btn-primary w-25">Save changes</button>
+							</div>
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- Browse Jobs END -->
+</div>
+{% endblock %}
+  

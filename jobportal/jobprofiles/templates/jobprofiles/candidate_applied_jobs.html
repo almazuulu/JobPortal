@@ -32,7 +32,7 @@
 								<div class="job-post-info m-a0">
 									<h4><a href="{% url 'job_details' job.id  %}">{{ job.title }}</a></h4>
 									<ul>
-										<li><a href="company-profile.html">@company-name</a></li>
+										<li><a href="#">{{ job.company }}</a></li>
 										<li><i class="fas fa-map-marker-alt"></i> {{ job.location }}, {{ job.country }} </li>
 										<li><i class="far fa-money-bill-alt"></i> {{ job.salary_min }} - <i class="far fa-money-bill-alt"></i> {{ job.salary_max }}</li>
 									</ul>

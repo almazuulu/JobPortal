@@ -27,7 +27,7 @@
 							</div>
 						</div>
 
-						{% if savedJobs.paginator.coun > 0 %}
+						{% if savedJobs.paginator.count > 0 %}
 						<table>
 							<thead>
 								<tr>
@@ -41,16 +41,19 @@
 							<tbody> {% for job in savedJobs %} <tr>
 									<td class="job-post-company">
 										<a href="javascript:void(0);"><span>
-												<img alt="" src="images/logo/icon2.png" />
+												<img alt="" src="{{ job.company_logo.url }}" />
 											</span></a>
 									</td>
 									<td class="job-name"><a href="{% url 'job_details' job.id %}">{{ job.title }}</a></td>
-									<td class="criterias text-primary"><a href="company-profile.html">@company-name</a></td>
+									<td class="criterias text-primary"><a href="#">{{ job.company }}</a></td>
 									<td class="date">{{ job.posted_date }}</td>
 									<td class="job-links">
 										<a href="javascript:void(0);" data-bs-toggle="modal" data-bs-target="#savedJob{{ forloop.counter }}">
 											<i class="fa fa-eye"></i></a>
-										<a href="javascript:void(0);"><i class="ti-trash"></i></a>
+										<form method="POST" action="{% url 'remove_favorited_job' job.id %}">
+											{% csrf_token %}
+											<button type="submit" class="link-button-fa"><i class="fa fa-trash"></i></button>
+										</form>
 									</td>
 								</tr> {% endfor %} </tbody>
 						</table>

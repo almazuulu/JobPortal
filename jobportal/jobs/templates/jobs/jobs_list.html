@@ -123,10 +123,16 @@
 										<span>${{ job.salary_min }} - $ {{ job.salary_max }}</span>
 									</div>
 								</div>
-								<label class="like-btn">
-									<input type="checkbox">
-									<span class="checkmark"></span>
-								</label>
+								
+								{% if user.is_authenticated %}
+								{% if is_candidate %} 
+								<form action="{% url 'save_job' job.id %}">
+									<label class="like-btn">
+										<button class="link-button-fa"> <i class="fa fa-heart" aria-hidden="true"></i></button>
+									</label>
+								</form>
+								{% endif %}
+								{% endif %}
 							</div>
 						</li>
 						{% endfor %}

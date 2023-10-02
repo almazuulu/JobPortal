@@ -23,208 +23,62 @@
 						<a href="{% url 'home' %}" class="site-button right-arrow button-sm float-end">Back</a>
 					</div>
 					<ul class="post-job-bx browse-job-grid post-resume row">
+						{% for candidate in applicants %}
 						<li class="col-lg-6 col-md-6">
 							<div class="post-bx">
 								<div class="d-flex m-b20">
 									<div class="job-post-info">
-										<h5 class="m-b0"><a href="jobs-profile.html">Ali Tufan</a></h5>
+										<h5 class="m-b0"><a href="#">{{ candidate.full_name }}</a></h5>
 										<p class="m-b5 font-13">
-											<a href="javascript:void(0);" class="text-primary">UX / UI Designer </a>
-											at Atract Solutions</p>
+											<a href="javascript:void(0);" class="text-primary">{{ candidate.current_job_title }}</a>
+										</p>
 										<ul>
-											<li><i class="fas fa-map-marker-alt"></i>Sacramento, California</li>
-											<li><i class="far fa-money-bill-alt"></i> $ 2500</li>
+											<li><i class="fas fa-map-marker-alt"></i>{{ candidate.user_profile.city }}, {{ candidate.user_profile.country }}</li>
+											<li><i class="far fa-money-bill-alt"></i> $ {{ candidate.expected_salary }}</li>
 										</ul>
 									</div>
 								</div>
-								<div class="job-time m-t15 m-b10">
+								<!-- <div class="job-time m-t15 m-b10">
 									<a href="javascript:void(0);"><span>PHP</span></a>
 									<a href="javascript:void(0);"><span>Angular</span></a>
 									<a href="javascript:void(0);"><span>Bootstrap</span></a>
-								</div>
+								</div> -->
 								<a href="files/pdf-sample.pdf" target="blank" class="job-links">
 									<i class="fa fa-download"></i>
 								</a>
 							</div>
 						</li>
-						<li class="col-lg-6 col-md-6">
-							<div class="post-bx">
-								<div class="d-flex m-b20">
-									<div class="job-post-info">
-										<h5 class="m-b0"><a href="jobs-profile.html">Tammy Dixon</a></h5>
-										<p class="m-b5 font-13">
-											<a href="javascript:void(0);" class="text-primary">UX / UI Designer </a>
-											at Atract Solutions</p>
-										<ul>
-											<li><i class="fas fa-map-marker-alt"></i>Sacramento, California</li>
-											<li><i class="far fa-money-bill-alt"></i> $ 2500</li>
-										</ul>
-									</div>
-								</div>
-								<div class="job-time m-t15 m-b10">
-									<a href="javascript:void(0);"><span>PHP</span></a>
-									<a href="javascript:void(0);"><span>Angular</span></a>
-									<a href="javascript:void(0);"><span>Bootstrap</span></a>
-								</div>
-								<a href="files/pdf-sample.pdf" target="blank" class="job-links">
-									<i class="fa fa-download"></i>
-								</a>
-							</div>
-						</li>
-						<li class="col-lg-6 col-md-6">
-							<div class="post-bx">
-								<div class="d-flex m-b20">
-									<div class="job-post-info">
-										<h5 class="m-b0"><a href="jobs-profile.html">David kamal</a></h5>
-										<p class="m-b5 font-13">
-											<a href="javascript:void(0);" class="text-primary">UX / UI Designer </a>
-											at Atract Solutions</p>
-										<ul>
-											<li><i class="fas fa-map-marker-alt"></i>Sacramento, California</li>
-											<li><i class="far fa-money-bill-alt"></i> $ 2500</li>
-										</ul>
-									</div>
-								</div>
-								<div class="job-time m-t15 m-b10">
-									<a href="javascript:void(0);"><span>PHP</span></a>
-									<a href="javascript:void(0);"><span>Angular</span></a>
-									<a href="javascript:void(0);"><span>Bootstrap</span></a>
-								</div>
-								<a href="files/pdf-sample.pdf" target="blank" class="job-links">
-									<i class="fa fa-download"></i>
-								</a>
-							</div>
-						</li>
-						<li class="col-lg-6 col-md-6">
-							<div class="post-bx">
-								<div class="d-flex m-b20">
-									<div class="job-post-info">
-										<h5 class="m-b0"><a href="jobs-profile.html">John Doe</a></h5>
-										<p class="m-b5 font-13">
-											<a href="javascript:void(0);" class="text-primary">UX / UI Designer </a>
-											at Atract Solutions</p>
-										<ul>
-											<li><i class="fas fa-map-marker-alt"></i>Sacramento, California</li>
-											<li><i class="far fa-money-bill-alt"></i> $ 2500</li>
-										</ul>
-									</div>
-								</div>
-								<div class="job-time m-t15 m-b10">
-									<a href="javascript:void(0);"><span>PHP</span></a>
-									<a href="javascript:void(0);"><span>Angular</span></a>
-									<a href="javascript:void(0);"><span>Bootstrap</span></a>
-								</div>
-								<a href="files/pdf-sample.pdf" target="blank" class="job-links">
-									<i class="fa fa-download"></i>
-								</a>
-							</div>
-						</li>
-						<li class="col-lg-6 col-md-6">
-							<div class="post-bx">
-								<div class="d-flex m-b20">
-									<div class="job-post-info">
-										<h5 class="m-b0"><a href="jobs-profile.html">Ali Tufan</a></h5>
-										<p class="m-b5 font-13">
-											<a href="javascript:void(0);" class="text-primary">UX / UI Designer </a>
-											at Atract Solutions</p>
-										<ul>
-											<li><i class="fas fa-map-marker-alt"></i>Sacramento, California</li>
-											<li><i class="far fa-money-bill-alt"></i> $ 2500</li>
-										</ul>
-									</div>
-								</div>
-								<div class="job-time m-t15 m-b10">
-									<a href="javascript:void(0);"><span>PHP</span></a>
-									<a href="javascript:void(0);"><span>Angular</span></a>
-									<a href="javascript:void(0);"><span>Bootstrap</span></a>
-								</div>
-								<a href="files/pdf-sample.pdf" target="blank" class="job-links">
-									<i class="fa fa-download"></i>
-								</a>
-							</div>
-						</li>
-						<li class="col-lg-6 col-md-6">
-							<div class="post-bx">
-								<div class="d-flex m-b20">
-									<div class="job-post-info">
-										<h5 class="m-b0"><a href="jobs-profile.html">Tammy Dixon</a></h5>
-										<p class="m-b5 font-13">
-											<a href="javascript:void(0);" class="text-primary">UX / UI Designer </a>
-											at Atract Solutions</p>
-										<ul>
-											<li><i class="fas fa-map-marker-alt"></i>Sacramento, California</li>
-											<li><i class="far fa-money-bill-alt"></i> $ 2500</li>
-										</ul>
-									</div>
-								</div>
-								<div class="job-time m-t15 m-b10">
-									<a href="javascript:void(0);"><span>PHP</span></a>
-									<a href="javascript:void(0);"><span>Angular</span></a>
-									<a href="javascript:void(0);"><span>Bootstrap</span></a>
-								</div>
-								<a href="files/pdf-sample.pdf" target="blank" class="job-links">
-									<i class="fa fa-download"></i>
-								</a>
-							</div>
-						</li>
-						<li class="col-lg-6 col-md-6">
-							<div class="post-bx">
-								<div class="d-flex m-b20">
-									<div class="job-post-info">
-										<h5 class="m-b0"><a href="jobs-profile.html">David kamal</a></h5>
-										<p class="m-b5 font-13">
-											<a href="javascript:void(0);" class="text-primary">UX / UI Designer </a>
-											at Atract Solutions</p>
-										<ul>
-											<li><i class="fas fa-map-marker-alt"></i>Sacramento, California</li>
-											<li><i class="far fa-money-bill-alt"></i> $ 2500</li>
-										</ul>
-									</div>
-								</div>
-								<div class="job-time m-t15 m-b10">
-									<a href="javascript:void(0);"><span>PHP</span></a>
-									<a href="javascript:void(0);"><span>Angular</span></a>
-									<a href="javascript:void(0);"><span>Bootstrap</span></a>
-								</div>
-								<a href="files/pdf-sample.pdf" target="blank" class="job-links">
-									<i class="fa fa-download"></i>
-								</a>
-							</div>
-						</li>
-						<li class="col-lg-6 col-md-6">
-							<div class="post-bx">
-								<div class="d-flex m-b20">
-									<div class="job-post-info">
-										<h5 class="m-b0"><a href="jobs-profile.html">John Doe</a></h5>
-										<p class="m-b5 font-13">
-											<a href="javascript:void(0);" class="text-primary">UX / UI Designer </a>
-											at Atract Solutions</p>
-										<ul>
-											<li><i class="fas fa-map-marker-alt"></i>Sacramento, California</li>
-											<li><i class="far fa-money-bill-alt"></i> $ 2500</li>
-										</ul>
-									</div>
-								</div>
-								<div class="job-time m-t15 m-b10">
-									<a href="javascript:void(0);"><span>PHP</span></a>
-									<a href="javascript:void(0);"><span>Angular</span></a>
-									<a href="javascript:void(0);"><span>Bootstrap</span></a>
-								</div>
-								<a href="files/pdf-sample.pdf" target="blank" class="job-links">
-									<i class="fa fa-download"></i>
-								</a>
-							</div>
-						</li>
+						{% endfor %}
 					</ul>
-					<div class="pagination-bx float-end">
+					{% if applicants.paginator.count > 0 %}
+					<div class="pagination-bx style-1 m-t30">
 						<ul class="pagination">
-							<li class="previous"><a href="javascript:void(0);"><i class="ti-arrow-left"></i> Prev</a></li>
-							<li class="active"><a href="javascript:void(0);">1</a></li>
-							<li><a href="javascript:void(0);">2</a></li>
-							<li><a href="javascript:void(0);">3</a></li>
-							<li class="next"><a href="javascript:void(0);">Next <i class="ti-arrow-right"></i></a></li>
+							{% if applicants.has_previous %}
+							<li class="previous">
+								<a href="?page={{ applicants.previous_page_number }}"><i class="fa fa-arrow-left"></i> Prev</a>
+							</li>
+							{% endif %}
+
+							{% for page_num in applicants.paginator.page_range %}
+							{% if applicants.number == page_num %}
+							<li class="active">
+								<a href="?page={{ page_num }}">{{ page_num }}</a>
+							</li>
+							{% else %}
+							<li>
+								<a href="?page={{ page_num }}">{{ page_num }}</a>
+							</li>
+							{% endif %}
+							{% endfor %}
+
+							{% if applicants.has_next %}
+							<li class="next">
+								<a href="?page={{ applicants.next_page_number }}">Next <i class="fa fa-arrow-right"></i></a>
+							</li>
+							{% endif %}
 						</ul>
 					</div>
+					{% endif %}
 				</div>
 			</div>
 		</div>
