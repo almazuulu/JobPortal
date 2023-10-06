@@ -1,31 +1,62 @@
+from typing import Any
 from django.shortcuts import render, get_object_or_404
 from .models import Country, JobPosition
 from jobprofiles.models import CompanyProfile
 from blog.views import topRecentNews
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from utilities.paginator_page import paginate_queryset
+from django.views import View 
+from django.views.generic.detail import DetailView
 
 countries = Country.objects.all()
 companies = CompanyProfile.objects.all()
 job_areas = JobPosition.objects.values_list('area', flat=True).distinct().exclude(area__isnull=True).exclude(area='')
 
-def alljobs(request):
-    context = {
+# def alljobs(request):
+#     context = {
+#         'titlepage': 'All jobs',
+#         'countries': countries,
+#         'companies': companies,
+#     }
+#     return render(request, 'jobs/jobs.html', context)
+
+class AllJobsView(View):
+    template_name = 'jobs/jobs.html'
+    
+    def get(self, request):
+        
+        context = {
         'titlepage': 'All jobs',
         'countries': countries,
         'companies': companies,
-    }
-    return render(request, 'jobs/jobs.html', context)
+        }
+        
+        return render(request, self.template_name, context)
+        
 
-def job_details(request, job_id):
-    job = get_object_or_404(JobPosition, id=job_id)
+# def job_details(request, job_id):
+#     job = get_object_or_404(JobPosition, id=job_id)
     
-    context = {
-        'job': job,
-        'topRecentNews': topRecentNews,
-    }
+#     context = {
+#         'job': job,
+#         'topRecentNews': topRecentNews,
+#     }
     
-    return render(request, 'jobs/job_detail.html', context)
+#     return render(request, 'jobs/job_detail.html', context)
+
+class JobDetailsView(DetailView):
+    model = JobPosition
+    template_name = 'jobs/job_detail.html'
+    # object - должны сделать перебор внутри шаблона используя object
+    context_object_name = 'job'
+    pk_url_kwarg = 'job_id' # по умолчанию используется pk
+    
+    def get_context_data(self, **kwargs: Any) -> dict[str, Any]:
+        context = super().get_context_data(**kwargs)
+        
+        context['topRecentNews'] = topRecentNews
+        
+        return context
 
 
 # Представления для обработки различных фильтров

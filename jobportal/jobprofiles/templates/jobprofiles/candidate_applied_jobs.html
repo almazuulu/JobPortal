@@ -14,7 +14,7 @@
 				</div>
 				<div class="col-xl-9 col-lg-8 m-b30">
 					<div class="job-bx-title clearfix">
-						<h5 class="font-weight-700 float-start text-uppercase">{{ applied_jobs.paginator.count }} Jobs Found</h5>
+						<h5 class="font-weight-700 float-start text-uppercase">{{ jobs.paginator.count }} Jobs Found</h5>
 						<div class="float-end">
 							<span class="select-title">Sort by freshness</span>
 							<select>
@@ -25,9 +25,9 @@
 							</select>
 						</div>
 					</div>
-					{% if applied_jobs.paginator.count %}
+					{% if jobs.paginator.count %}
 					<ul class="post-job-bx browse-job"> 
-						{% for job in applied_jobs %} <li>
+						{% for job in jobs %} <li>
 							<div class="post-bx">
 								<div class="job-post-info m-a0">
 									<h4><a href="{% url 'job_details' job.id  %}">{{ job.title }}</a></h4>
@@ -47,15 +47,15 @@
 									</div>
 								</div>
 							</div>
-						</li> {% endfor %} </ul> {% if applied_jobs.paginator.count > 0 %} <div class="pagination-bx style-1 m-t30">
-						<ul class="pagination"> {% if applied_jobs.has_previous %} <li class="previous">
-								<a href="?page={{ applied_jobs.previous_page_number }}"><i class="fa fa-arrow-left"></i> Prev</a>
-							</li> {% endif %} {% for page_num in applied_jobs.paginator.page_range %} {% if applied_jobs.number == page_num %} <li class="active">
+						</li> {% endfor %} </ul> {% if jobs.paginator.count > 0 %} <div class="pagination-bx style-1 m-t30">
+						<ul class="pagination"> {% if jobs.has_previous %} <li class="previous">
+								<a href="?page={{ jobs.previous_page_number }}"><i class="fa fa-arrow-left"></i> Prev</a>
+							</li> {% endif %} {% for page_num in jobs.paginator.page_range %} {% if jobs.number == page_num %} <li class="active">
 								<a href="?page={{ page_num }}">{{ page_num }}</a>
 							</li> {% else %} <li>
 								<a href="?page={{ page_num }}">{{ page_num }}</a>
-							</li> {% endif %} {% endfor %} {% if applied_jobs.has_next %} <li class="next">
-								<a href="?page={{ applied_jobs.next_page_number }}">Next <i class="fa fa-arrow-right"></i></a>
+							</li> {% endif %} {% endfor %} {% if jobs.has_next %} <li class="next">
+								<a href="?page={{ jobs.next_page_number }}">Next <i class="fa fa-arrow-right"></i></a>
 							</li> {% endif %} 
 						</ul>
 						{% endif %}

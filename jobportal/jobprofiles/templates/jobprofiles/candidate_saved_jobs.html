@@ -15,7 +15,7 @@
 				<div class="col-xl-9 col-lg-8 m-b30">
 					<div class="job-bx save-job table-job-bx clearfix">
 						<div class="job-bx-title clearfix">
-							<h5 class="font-weight-700 float-start text-uppercase">{{ savedJobs.paginator.count }} Saved Jobs</h5>
+							<h5 class="font-weight-700 float-start text-uppercase">{{ jobs.paginator.count }} Saved Jobs</h5>
 							<div class="float-end">
 								<span class="select-title">Sort by freshness</span>
 								<select>
@@ -27,7 +27,7 @@
 							</div>
 						</div>
 
-						{% if savedJobs.paginator.count > 0 %}
+						{% if jobs.paginator.count > 0 %}
 						<table>
 							<thead>
 								<tr>
@@ -38,7 +38,7 @@
 									<th></th>
 								</tr>
 							</thead>
-							<tbody> {% for job in savedJobs %} <tr>
+							<tbody> {% for job in jobs %} <tr>
 									<td class="job-post-company">
 										<a href="javascript:void(0);"><span>
 												<img alt="" src="{{ job.company_logo.url }}" />
@@ -61,19 +61,19 @@
 							<h5> No saved jobs yet</h5> 
 						{% endif %}
 						
-						{% if savedJobs.paginator.count > 0 %} <div class="pagination-bx style-1 m-t30">
-							<ul class="pagination"> {% if savedJobs.has_previous %} <li class="previous">
-									<a href="?page={{ savedJobs.previous_page_number }}"><i class="fa fa-arrow-left"></i> Prev</a>
-								</li> {% endif %} {% for page_num in savedJobs.paginator.page_range %} {% if savedJobs.number == page_num %} <li class="active">
+						{% if jobs.paginator.count > 0 %} <div class="pagination-bx style-1 m-t30">
+							<ul class="pagination"> {% if jobs.has_previous %} <li class="previous">
+									<a href="?page={{ jobs.previous_page_number }}"><i class="fa fa-arrow-left"></i> Prev</a>
+								</li> {% endif %} {% for page_num in jobs.paginator.page_range %} {% if jobs.number == page_num %} <li class="active">
 									<a href="?page={{ page_num }}">{{ page_num }}</a>
 								</li> {% else %} <li>
 									<a href="?page={{ page_num }}">{{ page_num }}</a>
-								</li> {% endif %} {% endfor %} {% if savedJobs.has_next %} <li class="next">
-									<a href="?page={{ savedJobs.next_page_number }}">Next <i class="fa fa-arrow-right"></i></a>
+								</li> {% endif %} {% endfor %} {% if jobs.has_next %} <li class="next">
+									<a href="?page={{ jobs.next_page_number }}">Next <i class="fa fa-arrow-right"></i></a>
 								</li> {% endif %} </ul>
 						</div> {% endif %}
 					</div>
-					<!-- Modal --> {% for job in savedJobs %} <div class="modal fade modal-bx-info" id="savedJob{{ forloop.counter }}" tabindex="-1" role="dialog"
+					<!-- Modal --> {% for job in jobs %} <div class="modal fade modal-bx-info" id="savedJob{{ forloop.counter }}" tabindex="-1" role="dialog"
 						aria-hidden="true">
 						<div class="modal-dialog" role="document">
 							<div class="modal-content">
