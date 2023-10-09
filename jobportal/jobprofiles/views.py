@@ -3,7 +3,7 @@ from django.db import models
 from django.shortcuts import render, redirect, get_object_or_404
 from .models import CandidateProfile, CompanyProfile, UserProfile
 from utilities.paginator_page import paginate_queryset
-from django.contrib import auth
+from django.contrib import auth, messages
 from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
 from .forms import UserRegisterForm, UserProfileForm, CandidateProfileForm, ChangePasswordForm, CompanyProfileForm, JobPositionForm
@@ -12,9 +12,10 @@ from django.contrib.auth import update_session_auth_hash
 from django.http import HttpResponseForbidden
 from django.views.generic import TemplateView
 from django.views import View
-from django.views.generic.edit import FormView, DeleteView, UpdateView
+from django.views.generic.edit import FormView, DeleteView, CreateView
 from django.utils.decorators import method_decorator
 from django.urls import reverse_lazy
+
 
 
 
@@ -54,8 +55,10 @@ class LoginView(TemplateView):
         
         if user:
             auth.login(request, user)
+            messages.success(request, f'Dear {username} you are successfully loged in!')
             return redirect(self.success_url)
         else:
+            messages.error(request, f'Incorrect username or password')
             return redirect(self.error_url)
         
 # def logout(request):
@@ -160,6 +163,8 @@ class ChangePasswordView(FormView):
          user = form.save()
          # Обновляем сессию, чтобы пользов не выходил из системы после смены пароля
          update_session_auth_hash(self.request, form.user)
+         
+         messages.success(self.request, f'Dear {user.username} your password was successfully chaged! Please Login again!')
          return super(ChangePasswordView, self).form_valid(form)
                 
             
@@ -242,7 +247,7 @@ def apply_for_job(request, job_id):
     candidate_profile = user_profile.candidateprofile
     job = get_object_or_404(JobPosition, id=job_id)
     candidate_profile.applied_jobs.add(job)
-    
+    messages.success(request, f'Dear {user_profile.user.first_name} you successfully applied for {job.title} at {job.company.company_name}!')
     return redirect('candidate_applied_jobs', candidate_profile.id)
 
 
@@ -256,7 +261,7 @@ def save_job(request, job_id):
     candidate_profile = user_profile.candidateprofile
     job = get_object_or_404(JobPosition, id=job_id)
     candidate_profile.favorited_jobs.add(job)
-    
+    messages.success(request, f'{job.title} was successfully saved in your profile!')
     return redirect('candidate_saved_jobs', candidate_profile.id)
 
 
@@ -269,7 +274,7 @@ def remove_favorited_job(request, job_id):
     job = get_object_or_404(JobPosition, id=job_id)
     candidate_profile = user_profile.candidateprofile
     candidate_profile.favorited_jobs.remove(job)
-    
+    messages.success(request, f'{job.title} from {job.company.company_name} was successfully removed from saved!')
     return redirect('candidate_saved_jobs', candidate_profile.id)
 
 
@@ -324,6 +329,7 @@ def edit_job(request, job_id):
         form = JobPositionForm(request.POST, instance=job)
         if form.is_valid():
             form.save()
+            messages.success(request, f'{job.title} was successfully updated!')
             return redirect('manage_jobs', company_id)
         else:
             form = JobPositionForm(instance=job)
@@ -352,29 +358,51 @@ def company_resume(request):
     }
     return render(request, 'jobprofiles/company_resume.html', context)
     
+
+
+# def post_job(request):
+#     user = request.user
+#     company_id = user.userprofile.companyprofile.id
     
-def post_job(request):
-    user = request.user
-    company_id = user.userprofile.companyprofile.id
+#     if not(hasattr(user, 'userprofile') and hasattr(user.userprofile, 'companyprofile')):
+#         return HttpResponseForbidden()
     
-    if not(hasattr(user, 'userprofile') and hasattr(user.userprofile, 'companyprofile')):
-        return HttpResponseForbidden()
-    
-    if request.method == 'POST':
-        form = JobPositionForm(request.POST, request.FILES)
-        if form.is_valid():
-            job_position = form.save(commit=False)
-            job_position.company = user.userprofile.companyprofile
-            job_position.save()
+#     if request.method == 'POST':
+#         form = JobPositionForm(request.POST, request.FILES)
+#         if form.is_valid():
+#             job_position = form.save(commit=False)
+#             job_position.company = user.userprofile.companyprofile
+#             job_position.save()
             
-            return redirect('manage_jobs', company_id)
-    else:
-        form = JobPositionForm()
+#             return redirect('manage_jobs', company_id)
+#     else:
+#         form = JobPositionForm()
         
-    context = {
-        'form': form,
-    }
-    return render(request, 'jobprofiles/company_post_jobs.html', context)    
+#     context = {
+#         'form': form,
+#     }
+#     return render(request, 'jobprofiles/company_post_jobs.html', context)    
+@method_decorator(login_required(login_url='login'), name='dispatch')
+class PostJobView(CreateView):   
+    model = JobPosition
+    form_class = JobPositionForm
+    template_name = 'jobprofiles/company_post_jobs.html'
+    success_url = 'manage_jobs'
+     
+    def dispatch(self, request, *args, **kwargs):
+        user = request.user
+        if not (hasattr(user, 'userprofile') and hasattr(user.userprofile, 'companyprofile')):
+            return HttpResponseForbidden()
+        return super().dispatch(request, *args, **kwargs)
     
+    def form_valid(self, form):
+        job_position = form.save(commit=False)
+        job_position.company = self.request.user.userprofile.companyprofile
+        messages.success(self.request, f'{job_position} inn {job_position.company.company_name} was published successfully!' )
+        self.success_url = reverse_lazy('manage_jobs', args=[self.request.user.userprofile.companyprofile.id])
+        return super().form_valid(form)
+    
+    
+     
 
     

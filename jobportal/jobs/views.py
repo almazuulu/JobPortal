@@ -90,23 +90,43 @@ def get_jobs_list(request, queryset, items_per_page=2):
     return render(request, 'jobs/jobs_list.html', context)
 
 
-def job_search_result(request):
-    search_area = request.GET.get('job_area_name')
-    search_keywords = request.GET.get('keywords', '')
-    search_locations = request.GET.get('location', '')
+# def job_search_result(request):
+#     search_area = request.GET.get('job_area_name')
+#     search_keywords = request.GET.get('keywords', '')
+#     search_locations = request.GET.get('location', '')
 
-    filters = {
-        'title__icontains': search_keywords,
-        'location__icontains': search_locations,
-        'is_active': True,
-    }
+#     filters = {
+#         'title__icontains': search_keywords,
+#         'location__icontains': search_locations,
+#         'is_active': True,
+#     }
 
-    if search_area and search_area != "Select Sector":
-        filters['area__icontains'] = search_area
+#     if search_area and search_area != "Select Sector":
+#         filters['area__icontains'] = search_area
 
-    jobList = JobPosition.objects.filter(**filters)
+#     jobList = JobPosition.objects.filter(**filters)
 
-    return get_jobs_list(request, jobList, 4)
+#     return get_jobs_list(request, jobList, 4)
+
+class JobSearchView(View):
+    def get(self, request, *args, **kwargs):
+        search_area = request.GET.get('job_area_name')
+        search_keywords = request.GET.get('keywords', '')
+        search_locations = request.GET.get('location', '')
+
+        filters = {
+            'title__icontains': search_keywords,
+            'location__icontains': search_locations,
+            'is_active': True,
+        }
+
+        if search_area and search_area != "Select Sector":
+            filters['area__icontains'] = search_area
+
+        jobList = JobPosition.objects.filter(**filters)
+
+        return get_jobs_list(request, jobList, 4)
+        
 
     
         

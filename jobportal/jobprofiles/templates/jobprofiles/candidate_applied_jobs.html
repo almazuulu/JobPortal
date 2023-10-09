@@ -25,6 +25,7 @@
 							</select>
 						</div>
 					</div>
+					{% include 'includes/message_block.html' %}
 					{% if jobs.paginator.count %}
 					<ul class="post-job-bx browse-job"> 
 						{% for job in jobs %} <li>

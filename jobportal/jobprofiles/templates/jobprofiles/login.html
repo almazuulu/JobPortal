@@ -25,6 +25,7 @@
 		<div class="max-w500 m-auto bg-white m-b30">
 			<div class="p-a30 card browse-job radius-sm">
 				<div class="tab-content nav">
+					{% include 'includes/message_block.html' %}
 					<form id="login" class="tab-pane active col-12 p-a0 " method="POST" action="{% url 'login' %}"> {% csrf_token %} <h4 class="font-weight-700">LOGIN</h4>
 						<p class="font-weight-600">If you have an account with us, please log in.</p>
 						<div class="form-group">

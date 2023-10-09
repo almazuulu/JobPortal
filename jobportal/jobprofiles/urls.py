@@ -20,7 +20,7 @@ urlpatterns = [
     path('company/<int:company_id>', views.company_profile, name='company_profile'),
     path('company/manage_jobs/<int:company_id>', views.manage_jobs, name='manage_jobs'),
     path('company/company_resume/', views.company_resume, name='company_resume'),
-    path('company/post_job/', views.post_job, name='post_job'),
+    path('company/post_job/', views.PostJobView.as_view(), name='post_job'),
     path('company/delete_job/<int:job_id>', views.JobDeleteView.as_view(), name='delete_job'),
     path('company/edit_job/<int:job_id>', views.edit_job, name='edit_job'),
 ]
