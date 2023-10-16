@@ -24,11 +24,10 @@ class AllJobsView(View):
     template_name = 'jobs/jobs.html'
     
     def get(self, request):
-        
         context = {
-        'titlepage': 'All jobs',
-        'countries': countries,
-        'companies': companies,
+            'titlepage': 'All jobs',
+            'countries': countries,
+            'companies': companies,
         }
         
         return render(request, self.template_name, context)
@@ -62,6 +61,7 @@ class JobDetailsView(DetailView):
 # Представления для обработки различных фильтров
 def browse_job_by_country(request, country_name=None):
     return browse_job_by_filter(request, 'country', country_name)
+
 
 def browse_job_by_company(request, company_name=None):
     return browse_job_by_filter(request, 'company', company_name)

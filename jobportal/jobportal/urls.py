@@ -25,6 +25,7 @@ urlpatterns = [
     path('blogs/', include('blog.urls')),
     path('jobs/', include('jobs.urls')),
     path('profiles/', include('jobprofiles.urls')),
+    path('captcha/', include('captcha.urls')),
 ]
 
 if settings.DEBUG:

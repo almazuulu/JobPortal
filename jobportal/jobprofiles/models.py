@@ -63,7 +63,7 @@ class CompanyProfile(models.Model):
     def founded_date(self):
         return self.user_profile.date_of_birth
 
-    def country (self):
+    def country(self):
         return self.user_profile.country
         
     def email(self):
@@ -77,4 +77,3 @@ class CompanyProfile(models.Model):
 
     def full_name(self):
         return self.user_profile.user.get_full_name()
-    
