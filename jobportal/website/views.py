@@ -14,7 +14,8 @@ from django.contrib import messages
 
 def index(request):
     countries_with_job_counts = Country.objects.annotate(num_jobs=Count('job_positions'))
-    
+    # Получить работу по категориям
+    category_job_counts = JobPosition.objects.values('category').annotate(num_jobs=Count('category')).order_by('-num_jobs')
     recent_jobsList = JobPosition.objects.order_by('-posted_date')[:5]
     recent_jobs = paginate_queryset(request, recent_jobsList, 3)
     
@@ -23,6 +24,7 @@ def index(request):
         'companies': companies,
         'job_areas': job_areas,
         'recent_jobs': recent_jobs,
+        'category_job_counts': category_job_counts,
     }
     return render(request, 'website/index.html', context)
 

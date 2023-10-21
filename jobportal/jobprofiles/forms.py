@@ -105,12 +105,3 @@ class JobPositionForm(forms.ModelForm):
             'is_active': forms.CheckboxInput(attrs={'class': 'form-check-input'}),
             'job_type': forms.Select(attrs={'class': 'form-control'}),
         }
-
-        
-        
-
-        
-
-
-
-

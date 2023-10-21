@@ -67,12 +67,17 @@ def browse_job_by_company(request, company_name=None):
     return browse_job_by_filter(request, 'company', company_name)
 
 
+def browse_job_by_category(request, category_name=None):
+    return browse_job_by_filter(request, 'category', category_name)
+
 # Функция обобщенных представлений по фильтрам
 def browse_job_by_filter(request, filter_type=None, filter_value=None):
     if filter_type == 'country':
         queryset = JobPosition.objects.filter(country__country_name=filter_value, is_active=True)
     elif filter_type == 'company':
         queryset = JobPosition.objects.filter(company__company_name=filter_value)
+    elif filter_type == 'category':
+        queryset = JobPosition.objects.filter(category=filter_value, is_active=True)
     else:
         queryset = JobPosition.objects.filter(is_active=True)
     return get_jobs_list(request, queryset)
