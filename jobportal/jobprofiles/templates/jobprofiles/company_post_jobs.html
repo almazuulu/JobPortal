@@ -23,7 +23,8 @@
 						</div>
 						<form method="POST" action="{% url 'post_job' %}" enctype="multipart/form-data">
 							{% csrf_token %}
-							{{ form.as_p }}
+							{{form.as_p }}
+
 							<div class="text-center">
 								<button type="submit" class="btn btn-primary w-25">Create a job</button>
 							</div>
@@ -35,5 +36,12 @@
 	</div>
 	<!-- Browse Jobs END -->
 </div>
+{% block extra_js %} <script type="text/javascript" src="{% static 'ckeditor/ckeditor/ckeditor.js' %}">
+</script> 
+<script type="text/javascript">
+	CKEDITOR.replace('id_job_description');
+</script>
+
+{% endblock %}
 {% endblock %}
   

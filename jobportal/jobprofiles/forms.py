@@ -4,6 +4,7 @@ from django.contrib.auth.models import User
 from .models import UserProfile, CandidateProfile, CompanyProfile
 from django.contrib.auth.forms import PasswordChangeForm
 from jobs.models import JobPosition
+from ckeditor.widgets import CKEditorWidget
 
 class ChangePasswordForm(PasswordChangeForm):
     old_password = forms.CharField(widget=forms.PasswordInput(attrs={'class': 'form-control'}))
@@ -98,19 +99,10 @@ class JobPositionForm(forms.ModelForm):
             'salary_max': forms.NumberInput(attrs={'class': 'form-control', 'placeholder': 'Maximum Salary'}),
             'experience': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Experience'}),
             'job_image': forms.FileInput(attrs={'class': 'form-control-file'}),
-            'job_description': forms.Textarea(attrs={'class': 'form-control', 'placeholder': 'Job Description'}),
+            'job_description': CKEditorWidget(attrs={ 'placeholder': 'Enter job description here...'}),
             'how_to_apply': forms.Textarea(attrs={'class': 'form-control', 'placeholder': 'How to Apply'}),
             'job_requirements': forms.Textarea(attrs={'class': 'form-control', 'placeholder': 'Job Requirements'}),
             'skill': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Skills'}),
             'is_active': forms.CheckboxInput(attrs={'class': 'form-check-input'}),
             'job_type': forms.Select(attrs={'class': 'form-control'}),
         }
-
-        
-        
-
-        
-
-
-
-

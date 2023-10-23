@@ -39,86 +39,45 @@
 			</div>
 		</div>
 		<div class="row sp20">
+			{% for category in category_job_counts %}
 			<div class="col-lg-3 col-md-6 col-sm-6">
 				<div class="icon-bx-wraper">
 					<div class="icon-content">
-						<div class="icon-md text-primary m-b20"><i class="fa fa-map-marker"></i></div>
-						<a href="company-manage-job.html" class="dez-tilte">Design, Art & Multimedia</a>
-						<p class="m-a0">198 Open Positions</p>
-						<div class="rotate-icon"><i class="fa fa-map-marker"></i></div>
+						<div class="icon-md text-primary m-b20">
+							{% if category.category == "Design, Art & Multimedia" %}
+								<i class="fa fa-map-marker"></i>
+							{% elif category.category == "Education" %}
+								<i class="fa fa-graduation-cap"></i>
+							{% elif category.category == "Healthcare" %}
+								<i class="fa fa-medkit"></i>
+							{% elif category.category == "Human Resource" %}
+								<i class="fa fa-money"></i>
+							{# .. Можно добавить любые иконки по своему вкусу и доп условия #}
+							{% else %}
+								<i class="fa fa-check"></i>
+							{% endif %}
+						</div>
+						<a href="{% url 'jobs_by_category' category.category %}" class="dez-tilte">{{ category.category }}</a>
+						<p class="m-a0">{{ category.num_jobs }} Open Positions</p>
+						<div class="rotate-icon">
+							{% if category.category == "Design, Art & Multimedia" %}
+								<i class="fa fa-map-marker"></i>
+							{% elif category.category == "Education" %}
+								<i class="fa fa-graduation-cap"></i>
+							{% elif category.category == "Healthcare" %}
+								<i class="fa fa-medkit"></i>
+							{% elif category.category == "Human Resource" %}
+								<i class="fa fa-money"></i>
+							{# .. Можно добавить любые иконки по своему вкусу и доп условия #}
+							{% else %}
+								<i class="fa fa-check"></i>
+							{% endif %}
+						</div>
 					</div>
 				</div>
 			</div>
-			<div class="col-lg-3 col-md-6 col-sm-6">
-				<div class="icon-bx-wraper">
-					<div class="icon-content">
-						<div class="icon-md text-primary m-b20"><i class="fa fa-graduation-cap"></i></div>
-						<a href="company-manage-job.html" class="dez-tilte">Education Training</a>
-						<p class="m-a0">198 Open Positions</p>
-						<div class="rotate-icon"><i class="fa fa-graduation-cap"></i></div>
-					</div>
-				</div>
-			</div>
-			<div class="col-lg-3 col-md-6 col-sm-6">
-				<div class="icon-bx-wraper">
-					<div class="icon-content">
-						<div class="icon-md text-primary m-b20"><i class="fa fa-money"></i></div>
-						<a href="company-manage-job.html" class="dez-tilte">Accounting / Finance</a>
-						<p class="m-a0">198 Open Positions</p>
-						<div class="rotate-icon"><i class="fa fa-money"></i></div>
-					</div>
-				</div>
-			</div>
-			<div class="col-lg-3 col-md-6 col-sm-6">
-				<div class="icon-bx-wraper">
-					<div class="icon-content">
-						<div class="icon-md text-primary m-b20"><i class="fa fa-cloud"></i></div>
-						<a href="company-manage-job.html" class="dez-tilte">Human Resource</a>
-						<p class="m-a0">198 Open Positions</p>
-						<div class="rotate-icon"><i class="fa fa-cloud"></i></div>
-					</div>
-				</div>
-			</div>
-			<div class="col-lg-3 col-md-6 col-sm-6">
-				<div class="icon-bx-wraper">
-					<div class="icon-content">
-						<div class="icon-md text-primary m-b20"><i class="fa fa-bar-chart"></i></div>
-						<a href="company-manage-job.html" class="dez-tilte">Telecommunications</a>
-						<p class="m-a0">198 Open Positions</p>
-						<div class="rotate-icon"><i class="fa fa-bar-chart"></i></div>
-					</div>
-				</div>
-			</div>
-			<div class="col-lg-3 col-md-6 col-sm-6">
-				<div class="icon-bx-wraper">
-					<div class="icon-content">
-						<div class="icon-md text-primary m-b20"><i class="fa fa-cutlery"></i></div>
-						<a href="company-manage-job.html" class="dez-tilte">Restaurant / Food Service</a>
-						<p class="m-a0">198 Open Positions</p>
-						<div class="rotate-icon"><i class="fa fa-cutlery"></i></div>
-					</div>
-				</div>
-			</div>
-			<div class="col-lg-3 col-md-6 col-sm-6">
-				<div class="icon-bx-wraper">
-					<div class="icon-content">
-						<div class="icon-md text-primary m-b20"><i class="fa fa-camera-retro"></i></div>
-						<a href="company-manage-job.html" class="dez-tilte">Construction / Facilities</a>
-						<p class="m-a0">198 Open Positions</p>
-						<div class="rotate-icon"><i class="fa fa-camera-retro"></i></div>
-					</div>
-				</div>
-			</div>
-			<div class="col-lg-3 col-md-6 col-sm-6">
-				<div class="icon-bx-wraper">
-					<div class="icon-content">
-						<div class="icon-md text-primary m-b20"><i class="fa fa-medkit"></i></div>
-						<a href="company-manage-job.html" class="dez-tilte">Health</a>
-						<p class="m-a0">198 Open Positions</p>
-						<div class="rotate-icon"><i class="fa fa-medkit"></i></div>
-					</div>
-				</div>
-			</div>
+			{% endfor %}
+			
 		</div>
 	</div>
 </div>

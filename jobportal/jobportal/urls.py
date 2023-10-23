@@ -26,6 +26,7 @@ urlpatterns = [
     path('jobs/', include('jobs.urls')),
     path('profiles/', include('jobprofiles.urls')),
     path('captcha/', include('captcha.urls')),
+    path('ckeditor/', include('ckeditor_uploader.urls')),
 ]
 
 if settings.DEBUG:
